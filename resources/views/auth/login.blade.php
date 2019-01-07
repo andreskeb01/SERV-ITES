@@ -1,14 +1,15 @@
-@extends('layouts.master-layout')
+@extends('layouts.auth-layout')
 
 @section('content')
     <div class= "row">
-        <div clas="col-md-4 col-md-offset-4">
+        <div clas="col-md-3  ">
             <div class="panel panel-default">
-                <div class="panel-heading">
+               <div class="panel-heading">
                     <h1 class="panel-title">Acceso a la Aplicacion </h1>
 
                 </div>
                 <div class="panel-body">
+
                     <form method="post" action="{{ route( 'login_autenticar') }}">
 
                         {{csrf_field()}}
