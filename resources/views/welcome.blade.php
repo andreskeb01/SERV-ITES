@@ -65,29 +65,21 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
+        <br>
+        <br>
+        <br>
+        <div class="full-height">
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+                @if(session()->has('unautenticated'))
+                    <div style="color: #6f000f; font-size: 15px; font-weight: 600; ">{{session('unautenticated')}}</div>
+                @endif
+                <h1>Servicios del Instituto de Estudios Superiores <br> Rene Descartes</h1>
 
+                <br>
+                <br>
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{ route('login_index') }}">Servicios Bibliotecarios</a>
+                    <a href="{{ route('login_index') }}">Servicios Centro de Cómputo</a>
                 </div>
             </div>
         </div>

@@ -18,7 +18,7 @@ Route::group(['namespace' => 'Auth', 'prefix' => '' ], function ()
 {
     Route::get('/login', 'LoginController@showLoginForm')->name('login_index');
     Route::post('/login', 'LoginController@autenticar')->name('login_autenticar');
-   // Route::();
+    Route::post('/logout', 'LoginController@cerrarSesion')->name('cerrar_sesion');
 });
 
 Route::get ('/dashboard', 'DashboardBiblioteca\DashboardController@index')->name('dashboard');

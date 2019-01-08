@@ -31,7 +31,12 @@ class LoginController extends Controller
        } else return back()
            ->withErrors(['usuario_invalido'=>'fallo la autenticacion'])
            ->withInput(request(['email']));
+    }
 
+    public function cerrarSesion()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 
 

@@ -4,7 +4,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <img src="/base-biblioteca/images/libro.JPG " alt="  " height="30" width="100">
+            <img src="/base-biblioteca/images/libro.JPG " height="40" width="100">
             <a class="navbar-brand" href="#">ITES "Rene Descartes"</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,12 @@
                         <a class="nav-link" href="#">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <form method="POST" action="{{ route('cerrar_sesion') }}">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <button class="btn btn-sm btn-primary">Cerrar sesión</button>
+                            </div>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -79,7 +84,7 @@
             <div class="col-lg-4 col-sm-6 text-center mb-4">
                 <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Sistemas.jpg" alt="">
                 <h3>
-                    <br>Licecnciaturas en Sistemas Computacionales Administrativos.
+                    <br>Licenciatura en Sistemas Computacionales Administrativos.
                 </h3>
             </div>
         </div>
