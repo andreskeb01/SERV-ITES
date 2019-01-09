@@ -20,7 +20,7 @@ class TablaPermisosSeeder extends Seeder
         ]);
         Permission::create([
             'name'        => 'Ver detalle de usuarios del Sistema',
-            'slug'        => 'usuarios.detail',
+            'slug'        => 'usuarios.show',
             'description' => 'Ver en detalle todos los usuarios del Sistema',
         ]);
         Permission::create([
@@ -42,7 +42,7 @@ class TablaPermisosSeeder extends Seeder
         ]);
         Permission::create([
             'name'        => 'Ver detalle de roles del Sistema',
-            'slug'        => 'roles.detail',
+            'slug'        => 'roles.show',
             'description' => 'Ver en detalle todos los roles del Sistema',
         ]);
         Permission::create([
@@ -69,7 +69,7 @@ class TablaPermisosSeeder extends Seeder
         ]);
         Permission::create([
             'name'        => 'Ver detalle de libros',
-            'slug'        => 'libros.detail',
+            'slug'        => 'libros.show',
             'description' => 'Ver en detalle todos los libros',
         ]);
         Permission::create([

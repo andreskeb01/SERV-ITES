@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Caffeinated\Shinobi\Models\Role;
+use App\User;
 
 class TablaUsuariosSeeder extends Seeder
 {
@@ -12,8 +13,14 @@ class TablaUsuariosSeeder extends Seeder
      */
     public function run()
     {
+        //Crea el usuario SuperAdministrador
+        factory(User::class)->create([
+            'name' => 'Super Administrador',
+            'email' => 'egabriel.polanco@gmail.com',
+            'password' => bcrypt('admin')]);
+
         //Crea 10 usuarios
-        factory(App\User::class, 10)->create();
+        factory(User::class, 10)->create();
 
         //Crea el rol SuperAdministrador
         Role::create([
