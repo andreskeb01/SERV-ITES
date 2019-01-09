@@ -38,45 +38,45 @@
         </div>
     </div>
 
-    <!-- Seccion de licenciaturas -->
+    <!-- Seccion de Licenciaturas -->
     <div class="row">
         <div class="col-lg-4 col-sm-6 text-center mb-4">
             <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Derecho.png" alt="">
-            <h3>
-                <br>Licenciatura en Derecho.
-            </h3>
+            <h4>
+                <br>Licenciatura en Derecho
+            </h4>
 
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
             <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Contabilidad.jpg" alt="">
-            <h3>
-                <br>Licenciatura de Contaduria.
-            </h3>
+            <h4>
+                <br>Licenciatura en Contaduria
+            </h4>
 
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
             <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Administracion.jpg" alt="">
-            <h3>
-                <br>Licenciatura en Administración de Empresas.
-            </h3>
+            <h4>
+                <br>Licenciatura en Administración de Empresas
+            </h4>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
             <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Pedagogia.jpg" alt="">
-            <h3>
-                <br> Licenciatura en Pedagogia.
-            </h3>
+            <h4>
+                <br> Licenciatura en Pedagogía
+            </h4>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
             <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Comunicacion.jpg" alt="">
-            <h3>
-                <br>Licenciatura en Ciencias de la Comunicación.
-            </h3>
+            <h4>
+                <br>Licenciatura en Ciencias de la Comunicación
+            </h4>
         </div>
         <div class="col-lg-4 col-sm-6 text-center mb-4">
             <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Sistemas.jpg" alt="">
-            <h3>
-                <br>Licenciatura en Sistemas Computacionales Administrativos.
-            </h3>
+            <h4>
+                <br>Licenciatura en Sistemas Computacionales Administrativos
+            </h4>
         </div>
     </div>
 

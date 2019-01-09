@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <img src="/base-biblioteca/images/logo.jpg" height="40" width="100">
-        <a class="navbar-brand" href="">ITES "Rene Descartes"</a>
+        <a class="navbar-brand" href="{{route('biblioteca')}}">ITES "Rene Descartes"</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
