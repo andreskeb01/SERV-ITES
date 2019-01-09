@@ -27,7 +27,7 @@ class LoginController extends Controller
 
 
        if( Auth::attempt($credentials)){
-           return redirect()->route('dashboard');
+           return redirect()->route('biblioteca');
        } else return back()
            ->withErrors(['usuario_invalido'=>'fallo la autenticacion'])
            ->withInput(request(['email']));

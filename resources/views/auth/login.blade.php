@@ -5,7 +5,7 @@
         <div clas="col-md-3  ">
             <div class="panel panel-default">
                <div class="panel-heading">
-                    <h1 class="panel-title">Acceso a la Aplicacion </h1>
+                    <h1 class="panel-title">Acceso a la Aplicación </h1>
 
                 </div>
                 <div class="panel-body">
@@ -13,6 +13,12 @@
                     <form method="post" action="{{ route( 'login_autenticar') }}">
 
                         {{csrf_field()}}
+
+                        <div class="form-group" {{$errors->has('usuario_invalido') ? 'has-error' : ''}}>
+                            @if($errors->first('usuario_invalido'))
+                                <span class='help-block' style= 'color: red;' >{{__('auth.auth_error')}} </span>
+                            @endif
+                        </div>
 
                         <div class="form-group" {{$errors->has('email') ? 'has-error' : ''}}>
                             <label for="email">Email</label>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,13 +5,10 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Round About - Start Bootstrap Template</title>
+    <title>Servicios ITES</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/base-biblioteca/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/base-biblioteca/css/round-about.css" rel="stylesheet">
@@ -21,13 +17,31 @@
 
 <body>
 
-@yield('content')
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <img src="/base-biblioteca/images/logo.jpg" height="40" width="100">
+        <a class="navbar-brand" href="">ITES "Rene Descartes"</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        @yield('funciones')
 
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    @yield('content')
+
+</div>
+<!-- /.container -->
 
 <!-- Bootstrap core JavaScript -->
-<script src="/base-biblioteca/vendor/jquery/jquery.min.js"></script>
-<script src="/base-biblioteca/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('bootstrap/js/jquery.js')}}"></script>
+<script src="{{asset('bootstrap/js/bootstrap.bundle.js')}}"></script>
 
 </body>
 

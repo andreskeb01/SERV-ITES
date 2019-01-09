@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Caffeinated\Shinobi\Traits\ShinobiTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    //ShinobiTrait asigna las relaciones de los roles y permisos a un usuario (Relacion a nivel de sistema)
+    use Notifiable, ShinobiTrait;
 
     /**
      * The attributes that are mass assignable.
