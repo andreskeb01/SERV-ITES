@@ -1,8 +1,13 @@
 @extends('layouts.auth-layout')
 
 @section('content')
-    <div class= "row">
-        <div clas="col-md-3  ">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+        <div class= "row justify-content-md-center">
+        <div clas="col-md-3">
             <div class="panel panel-default">
                <div class="panel-heading">
                     <h1 class="panel-title">Acceso a la Aplicación </h1>
@@ -41,8 +46,8 @@
                                 <span class='help-block' style= 'color: red;' >{{__('auth.password_error')}} </span>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary py-1 px-3"> Acceder </button>
+                        <div class="form-group ">
+                            <button class="btn btn-primary py-1 px-3 "> Acceder </button>
                         </div>
 
                     </form>
