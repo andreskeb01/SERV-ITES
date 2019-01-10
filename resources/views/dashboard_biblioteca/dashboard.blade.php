@@ -30,6 +30,7 @@
 
 @section('content')
 
+
     <!-- Introduction Row -->
     <div style="padding: 20px; display: flex;">
         <h3>Bienvenido</h3>
