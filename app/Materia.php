@@ -13,4 +13,8 @@ class Materia extends Model
     public function licenciatura(){
         return $this->belongsTo(Licenciatura::class, 'materia_id');
     }
+
+    public function libros(){
+        return $this->hasMany(Libro::class);
+    }
 }

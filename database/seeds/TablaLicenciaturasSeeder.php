@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Licenciatura;
+use \App\Materia;
+use \App\Libro;
 
 class TablaLicenciaturasSeeder extends Seeder
 {
@@ -194,5 +195,25 @@ class TablaLicenciaturasSeeder extends Seeder
                 'cuatrimestre' => 2
             ]),
         ]);
+
+        //Asignacion de Libros a materias
+
+                                //Casteo la consulta de una materia a un modelo de Materia
+        //$int_estudio_derecho = $licenciatura_derecho->materias()->find(1);
+
+        $collection = Materia::where('nombre', "Introducción al Estudio del Derecho")->first();
+
+        dd($collection);
+        //$libro1 = Libro::find(2);
+        //$libro2 = Libro::find(2);
+        //$int_estudio_derecho->libros()->saveMany([$libro1, $libro2]);
+        /*
+        $derecho_romano = Materia::where('nombre', 'Derecho Romano I')->first();
+        $derecho_romano->libros()->saveMany([
+            new Libro(Libro::find(3)),
+            new Libro(Libro::find(4))
+        ]);*/
+
+
     }
 }

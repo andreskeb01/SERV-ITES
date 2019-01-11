@@ -11,6 +11,6 @@ class TablaLibrosSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Libro::class, 40)->create();
+        factory(App\Libro::class, 48)->create();
     }
 }

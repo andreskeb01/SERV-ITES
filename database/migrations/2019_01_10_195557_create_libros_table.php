@@ -18,6 +18,8 @@ class CreateLibrosTable extends Migration
             $table->string('titulo');
             $table->string('autor');
             $table->integer('numero');
+            $table->unsignedInteger('materia_id')->nullable();
+            $table->foreign('materia_id')->references('id')->on('materias');
             $table->timestamps();
         });
     }
