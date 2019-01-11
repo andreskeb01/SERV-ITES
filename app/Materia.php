@@ -1,0 +1,16 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Materia extends Model
+{
+    protected $table = 'materias';
+
+    protected $fillable = ['nombre', 'clave', 'materia_id'];
+
+    public function licenciatura(){
+        return $this->belongsTo(Licenciatura::class, 'materia_id');
+    }
+}

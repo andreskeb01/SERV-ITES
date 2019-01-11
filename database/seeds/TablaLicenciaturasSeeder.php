@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Licenciaturas;
-use App\Materias;
+use App\Licenciatura;
 
 class TablaLicenciaturasSeeder extends Seeder
 {
@@ -13,83 +12,115 @@ class TablaLicenciaturasSeeder extends Seeder
      */
     public function run()
     {
-       $derecho =  factory(Licenciaturas::class)->create([
+
+        //--Crea las licenciaturas y les asigna materias
+
+        $licenciatura_derecho = new App\Licenciatura([
             'nombre' => 'Licenciatura en Derecho',
-            'clave' => '001der']);
+            'clave' => '001der'
+        ]);
 
-        $administracion = factory(Licenciaturas::class)->create([
+        $licenciatura_derecho->save();
+
+        $licenciatura_derecho->materias()->saveMany([
+            new App\Materia([
+                'nombre' => 'Introducción al Estudio del Derecho',
+                'clave' => 'Der0101'
+            ]),
+            new App\Materia([
+                'nombre' => 'Derecho Romano I',
+                'clave' => 'Der0102'
+            ]),
+        ]);
+
+        $licenciatura_administracion = new App\Licenciatura([
             'nombre' => 'Licenciatura en Administración de Empresas',
-            'clave' => '002adm']);
+            'clave' => '002adm'
+        ]);
 
-        $contaduria = factory(Licenciaturas::class)->create([
+        $licenciatura_administracion->save();
+
+        $licenciatura_administracion->materias()->saveMany([
+            new App\Materia([
+                'nombre' => 'Introducción al Estudio de la Administración',
+                'clave' => 'Admin0101'
+            ]),
+            new App\Materia([
+                'nombre' => 'Administración I',
+                'clave' => 'Admin0102'
+            ]),
+        ]);
+
+        $licenciatura_contaduria = new App\Licenciatura([
             'nombre' => 'Licenciatura en Contaduría',
-            'clave' => '003con']);
+            'clave' => '003con'
+        ]);
 
-        $pedagogia = factory(Licenciaturas::class)->create([
+        $licenciatura_contaduria->save();
+
+        $licenciatura_contaduria->materias()->saveMany([
+            new App\Materia([
+                'nombre' => 'Introducción al Estudio de la Contaduría',
+                'clave' => 'Cont0101'
+            ]),
+            new App\Materia([
+                'nombre' => 'Contaduría I',
+                'clave' => 'Cont0102'
+            ]),
+        ]);
+
+        $licenciatura_pedagogia = new App\Licenciatura([
             'nombre' => 'Licenciatura en Pedagogia',
-            'clave' => '004ped']);
+            'clave' => '004ped'
+        ]);
 
-       $comunicacion = factory(App\Licenciaturas::class)->create([
+        $licenciatura_pedagogia->save();
+
+        $licenciatura_pedagogia->materias()->saveMany([
+            new App\Materia([
+                'nombre' => 'Introducción al Estudio de la Pedagogia',
+                'clave' => 'Ped0101'
+            ]),
+            new App\Materia([
+                'nombre' => 'Pedagogia I',
+                'clave' => 'Ped0102'
+            ]),
+        ]);
+
+        $licenciatura_comunicacion = new App\Licenciatura([
             'nombre' => 'Licenciatura en Ciencias de la Comunicación',
-            'clave' => '005com']);
+            'clave' => '005com'
+        ]);
 
-        $sistemas = factory(Licenciaturas::class)->create([
+        $licenciatura_comunicacion->save();
+
+        $licenciatura_comunicacion->materias()->saveMany([
+            new App\Materia([
+                'nombre' => 'Introducción al Estudio de la Comunicación',
+                'clave' => 'Com0101'
+            ]),
+            new App\Materia([
+                'nombre' => 'Comunicación I',
+                'clave' => 'Com0102'
+            ]),
+        ]);
+
+        $licenciatura_sistemas = new App\Licenciatura([
             'nombre' => 'Licenciatura en Sistemas Computacionales Administrativos',
-            'clave' => '006sis']);
+            'clave' => '006sis'
+        ]);
 
-       factory(Materias::class)->create([
-            'nombre' => 'Introducción al Estudio del Derecho',
-            'clave' => 'Der0101']);
+        $licenciatura_sistemas->save();
 
-        factory(Materias::class)->create([
-            'nombre' => 'Derecho Romano I',
-            'clave' => 'Der0102']);
-
-        factory(Materias::class)->create([
-            'nombre' => 'Historia del Derecho Mexicano',
-            'clave' => 'Der0103']);
-
-        factory(Materias::class)->create([
-            'nombre' => 'Informática Básica',
-            'clave' => 'Der0104']);
-
-        factory(Materias::class)->create([
-            'nombre' => 'Teoría Política',
-            'clave' => 'Der0105']);
-
-        factory(Materias::class)->create([
-            'nombre' => 'Expresión Oral y Escrita',
-            'clave' => 'Der0106']);
-        factory(Materias::class)->create([
-            'nombre' => 'Introducción al Estudio del Derecho',
-            'clave' => 'Der0101']);
-
-        factory(Materias::class)->create([
-            'nombre' => 'Derecho Romano I',
-            'clave' => 'Der0102']);
-
-        factory(Materias::class)->create([
-            'nombre' => 'Historia del Derecho Mexicano',
-            'clave' => 'Der0103']);
-
-        factory(Materias::class)->create([
-            'nombre' => 'Informática Básica',
-            'clave' => 'Der0104']);
-
-        factory(Materias::class)->create([
-            'nombre' => 'Teoría Política',
-            'clave' => 'Der0105']);
-
-        factory(Materias::class)->create([
-            'nombre' => 'Expresión Oral y Escrita',
-            'clave' => 'Der0106']);
-
-
-        $materias = App\Materias::all();
-
-        $derecho->materias()->save($materias[0]);
-
-        $administracion->materias()->save($materias[1]);
-
+        $licenciatura_sistemas->materias()->saveMany([
+            new App\Materia([
+                'nombre' => 'Introducción al Estudio de Sistemas',
+                'clave' => 'Sis0101'
+            ]),
+            new App\Materia([
+                'nombre' => 'Fundamentos de Ingeniería de Sofware',
+                'clave' => 'Sis0102'
+            ]),
+        ]);
     }
 }

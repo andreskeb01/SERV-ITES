@@ -141,10 +141,9 @@ class TablaPermisosSeeder extends Seeder
         $rol_alumno->assignPermission($permiso_biblioteca_index);
         $rol_alumno->assignPermission($permiso_biblioteca_show);
 
-
         //--Asignacion de roles a usuarios
 
-        //Rol de
+        //Rol de encargado de biblioteca
         $usuario_encargado_biblioteca = factory(User::class)->create([
             'name' => 'Encargado Biblioteca',
             'email' => 'andreskeb01@gmail.com',
@@ -153,7 +152,7 @@ class TablaPermisosSeeder extends Seeder
 
         $usuario_encargado_biblioteca->roles()->attach($rol_encargado_biblioteca);
 
-        //
+        //Rol de superaministrador
         $usuario_superadmin = factory(User::class)->create([
             'name' => 'Super Administrador',
             'email' => 'egabriel.polanco@gmail.com',
