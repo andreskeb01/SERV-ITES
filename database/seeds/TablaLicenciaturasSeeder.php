@@ -25,11 +25,23 @@ class TablaLicenciaturasSeeder extends Seeder
         $licenciatura_derecho->materias()->saveMany([
             new App\Materia([
                 'nombre' => 'Introducción al Estudio del Derecho',
-                'clave' => 'Der0101'
+                'clave' => 'Der0101',
+                'cuatrimestre' => 1
             ]),
             new App\Materia([
                 'nombre' => 'Derecho Romano I',
-                'clave' => 'Der0102'
+                'clave' => 'Der0102',
+                'cuatrimestre' => 1
+            ]),
+            new App\Materia([
+                'nombre' => 'Derecho Civil',
+                'clave' => 'Der0201',
+                'cuatrimestre' => 2
+            ]),
+            new App\Materia([
+                'nombre' => 'Derecho Penal',
+                'clave' => 'Der0202',
+                'cuatrimestre' => 2
             ]),
         ]);
 
@@ -43,11 +55,23 @@ class TablaLicenciaturasSeeder extends Seeder
         $licenciatura_administracion->materias()->saveMany([
             new App\Materia([
                 'nombre' => 'Introducción al Estudio de la Administración',
-                'clave' => 'Admin0101'
+                'clave' => 'Admin0101',
+                'cuatrimestre' => 1
             ]),
             new App\Materia([
                 'nombre' => 'Administración I',
-                'clave' => 'Admin0102'
+                'clave' => 'Admin0102',
+                'cuatrimestre' => 1
+            ]),
+            new App\Materia([
+                'nombre' => 'Tópicos de Recursos Humanos',
+                'clave' => 'Admin0201',
+                'cuatrimestre' => 2
+            ]),
+            new App\Materia([
+                'nombre' => 'Derecho Mercantil',
+                'clave' => 'Admin0202',
+                'cuatrimestre' => 2
             ]),
         ]);
 
@@ -61,11 +85,23 @@ class TablaLicenciaturasSeeder extends Seeder
         $licenciatura_contaduria->materias()->saveMany([
             new App\Materia([
                 'nombre' => 'Introducción al Estudio de la Contaduría',
-                'clave' => 'Cont0101'
+                'clave' => 'Cont0101',
+                'cuatrimestre' => 1
             ]),
             new App\Materia([
                 'nombre' => 'Contaduría I',
-                'clave' => 'Cont0102'
+                'clave' => 'Cont0102',
+                'cuatrimestre' => 1
+            ]),
+            new App\Materia([
+                'nombre' => 'Auditoria para Contadores',
+                'clave' => 'Cont0201',
+                'cuatrimestre' => 2
+            ]),
+            new App\Materia([
+                'nombre' => 'Matematicas II',
+                'clave' => 'Cont0202',
+                'cuatrimestre' => 2
             ]),
         ]);
 
@@ -79,11 +115,23 @@ class TablaLicenciaturasSeeder extends Seeder
         $licenciatura_pedagogia->materias()->saveMany([
             new App\Materia([
                 'nombre' => 'Introducción al Estudio de la Pedagogia',
-                'clave' => 'Ped0101'
+                'clave' => 'Ped0101',
+                'cuatrimestre' => 1
             ]),
             new App\Materia([
                 'nombre' => 'Pedagogia I',
-                'clave' => 'Ped0102'
+                'clave' => 'Ped0102',
+                'cuatrimestre' => 1
+            ]),
+            new App\Materia([
+                'nombre' => 'Pedagogía II',
+                'clave' => 'Ped0201',
+                'cuatrimestre' => 2
+            ]),
+            new App\Materia([
+                'nombre' => 'Tópicos de enseñanza docente',
+                'clave' => 'Ped0202',
+                'cuatrimestre' => 2
             ]),
         ]);
 
@@ -97,11 +145,23 @@ class TablaLicenciaturasSeeder extends Seeder
         $licenciatura_comunicacion->materias()->saveMany([
             new App\Materia([
                 'nombre' => 'Introducción al Estudio de la Comunicación',
-                'clave' => 'Com0101'
+                'clave' => 'Com0101',
+                'cuatrimestre' => 1
             ]),
             new App\Materia([
                 'nombre' => 'Comunicación I',
-                'clave' => 'Com0102'
+                'clave' => 'Com0102',
+                'cuatrimestre' => 1
+            ]),
+            new App\Materia([
+                'nombre' => 'Comunicación II',
+                'clave' => 'Com0201',
+                'cuatrimestre' => 2
+            ]),
+            new App\Materia([
+                'nombre' => 'Tópicos de Lenguaje',
+                'clave' => 'Com0202',
+                'cuatrimestre' => 2
             ]),
         ]);
 
@@ -115,11 +175,23 @@ class TablaLicenciaturasSeeder extends Seeder
         $licenciatura_sistemas->materias()->saveMany([
             new App\Materia([
                 'nombre' => 'Introducción al Estudio de Sistemas',
-                'clave' => 'Sis0101'
+                'clave' => 'Sis0101',
+                'cuatrimestre' => 1
             ]),
             new App\Materia([
                 'nombre' => 'Fundamentos de Ingeniería de Sofware',
-                'clave' => 'Sis0102'
+                'clave' => 'Sis0102',
+                'cuatrimestre' => 1
+            ]),
+            new App\Materia([
+                'nombre' => 'Cálculo Integral',
+                'clave' => 'Sis0201',
+                'cuatrimestre' => 2
+            ]),
+            new App\Materia([
+                'nombre' => 'Programación Orientada a Objetos',
+                'clave' => 'Sis0202',
+                'cuatrimestre' => 2
             ]),
         ]);
     }

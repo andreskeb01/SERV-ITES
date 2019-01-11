@@ -17,6 +17,7 @@ class CreateMateriasTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('clave');
+            $table->integer('cuatrimestre');
             $table->unsignedInteger('licenciatura_id')->nullable();
             $table->foreign('licenciatura_id')->references('id')->on('licenciaturas');
             $table->timestamps();
