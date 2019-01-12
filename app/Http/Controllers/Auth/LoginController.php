@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Auth;
+use function Symfony\Component\HttpKernel\Tests\Controller\controller_function;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,7 @@ class LoginController extends Controller
 
 
        if( Auth::attempt($credentials)){
-           return redirect()->route('biblioteca');
+           return redirect()->route('biblioteca' );
        } else return back()
            ->withErrors(['usuario_invalido'=>'fallo la autenticacion'])
            ->withInput(request(['email']));

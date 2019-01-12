@@ -17,6 +17,8 @@ class CreateLicenciaturasTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('clave');
+            $table->string('url_image');
+            $table->integer('cuatrimestres');
             $table->timestamps();
         });
     }

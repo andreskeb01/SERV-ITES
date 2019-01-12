@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TablaPermisosSeeder::class);
         //$this->call(TablaLibrosSeeder::class);
         $this->call(TablaLicenciaturasSeeder::class);
+
     }
 }

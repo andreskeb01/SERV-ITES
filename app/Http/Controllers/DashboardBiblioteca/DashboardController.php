@@ -10,6 +10,7 @@ namespace App\Http\Controllers\DashboardBiblioteca;
 
 
 use App\Http\Controllers\Controller;
+use App\Licenciatura;
 
 class DashboardController extends Controller
 {
@@ -19,9 +20,9 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-        return view ('dashboard_biblioteca.dashboard');
+    public function index(){
+        $licenciaturas = Licenciatura::latest()->paginate(10);
+        return view ('dashboard_biblioteca.dashboard', compact('licenciaturas'));
     }
 
 }

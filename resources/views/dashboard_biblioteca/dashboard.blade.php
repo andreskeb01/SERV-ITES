@@ -38,48 +38,27 @@
             <h5>{{ auth()->user()->name }}</h5>
         </div>
     </div>
-
+    @can('licenciaturas.index')
     <!-- Seccion de Licenciaturas -->
+
     <div class="row">
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-            <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Derecho.png" alt="">
-            <h4>
-                <br>Licenciatura en Derecho
-            </h4>
+        @forelse($licenciaturas as $licenciatura)
+            <div class="col-lg-4 col-sm-6 text-center mb-4">
+                <img class="rounded-circle img-fluid d-block mx-auto" src="{{$licenciatura->url_image}}" alt="">
+                <h4>
+                    <br>{{$licenciatura->nombre}}
+                </h4>
+            </div>
+            <a href="{{route('materias.index', $licenciatura)}}" class="btn btn-sm">ver licenciatura</a>
+        @empty
+            <div class="alert alert-danger">
+                {{__("No tienes registrado ninguna licenciatura")}}
+            </div>
+        @endforelse
 
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-            <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Contabilidad.jpg" alt="">
-            <h4>
-                <br>Licenciatura en Contaduria
-            </h4>
 
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-            <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Administracion.jpg" alt="">
-            <h4>
-                <br>Licenciatura en Administración de Empresas
-            </h4>
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-            <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Pedagogia.jpg" alt="">
-            <h4>
-                <br> Licenciatura en Pedagogía
-            </h4>
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-            <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Comunicacion.jpg" alt="">
-            <h4>
-                <br>Licenciatura en Ciencias de la Comunicación
-            </h4>
-        </div>
-        <div class="col-lg-4 col-sm-6 text-center mb-4">
-            <img class="rounded-circle img-fluid d-block mx-auto" src="/base-biblioteca/images/Sistemas.jpg" alt="">
-            <h4>
-                <br>Licenciatura en Sistemas Computacionales Administrativos
-            </h4>
-        </div>
     </div>
+    @endcan
 
     <!-- Footer -->
     <footer class="py-3 bg-dark">

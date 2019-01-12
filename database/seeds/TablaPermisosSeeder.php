@@ -128,6 +128,33 @@ class TablaPermisosSeeder extends Seeder
             'description'       => 'Puede acceder solo a información básica de inventario'
         ]);
 
+        $permiso_licenciatura_index = Permission::create([
+            'name'=>'Navegar Licenciaturas',
+            'slug'        => 'licenciaturas.index',
+            'description' => 'Navega y lista todas las licenciaturas',
+        ]);
+
+        $permiso_licenciatura_show = Permission::create([
+            'name'        => 'Ver detalle de licenciaturas',
+            'slug'        => 'licenciaturas.show',
+            'description' => 'Ver en detalle todas las licenciaturas',
+        ]);
+        $permiso_licenciatura_create = Permission::create([
+            'name'        => 'Creacion de licenciaturas',
+            'slug'        => 'licenciaturas.create',
+            'description' => 'Crear una licenciatura',
+        ]);
+        $permiso_licenciatura_edit = Permission::create([
+            'name'        => 'Edicion de licenciaturas',
+            'slug'        => 'licenciaturas.edit',
+            'description' => 'Editar cualquier dato de una licenciatura',
+        ]);
+        $permiso_licenciatura_delete = Permission::create([
+            'name'        => 'Eliminar licenciaturas',
+            'slug'        => 'licenciaturas.delete',
+            'description' => 'Eliminar cualquier licenciatura',
+        ]);
+
         //---Relaciones de Permisos y roles---
 
         //Permisos para el rol encargadobiblioteca
@@ -136,6 +163,12 @@ class TablaPermisosSeeder extends Seeder
         $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_create);
         $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_edit);
         $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_delete);
+
+        $rol_encargado_biblioteca->assignPermission($permiso_licenciatura_index);
+        $rol_encargado_biblioteca->assignPermission($permiso_licenciatura_show);
+        $rol_encargado_biblioteca->assignPermission($permiso_licenciatura_create);
+        $rol_encargado_biblioteca->assignPermission($permiso_licenciatura_edit);
+        $rol_encargado_biblioteca->assignPermission($permiso_licenciatura_delete);
 
         //Permisos para el rol alumno
         $rol_alumno->assignPermission($permiso_biblioteca_index);

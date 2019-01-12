@@ -55,6 +55,18 @@ Route::middleware(['auth'])->group(function () {
     Route::put('libros/{libro}', 'LibroController@update')->name('libros.update')->middleware('permission:libros.edit');
     Route::delete('libros/{libro}', 'LibroController@delete')->name('libros.delete')->middleware('permission:libros.delete');
 
+    //Permisos para Licenciaturas
+    Route::get('licenciaturas', 'LicenciaturaController@index')->name('licenciaturas.index')->middleware('permission:licenciaturas.index');
+    Route::post('licenciaturas/store', 'LicenciaturaController@store')->name('licenciaturas.store')->middleware('permission:licenciaturas.create');
+    Route::get('licenciaturas/create', 'LicenciaturaController@create')->name('licenciaturas.create')->middleware('permission:licenciaturas.create');
+    Route::get('licenciaturas/{licenciatura}', 'LicenciaturaController@show')->name('licenciaturas.show')->middleware('permission:licenciaturas.show');
+    Route::get('licenciaturas/{licenciatura}/edit', 'LicenciaturaController@edit')->name('licenciaturas.edit')->middleware('permission:licenciaturas.edit');
+    Route::put('licenciaturas/{licenciatura}', 'LicenciaturaController@update')->name('licenciaturas.update')->middleware('permission:licenciaturas.edit');
+    Route::delete('licenciaturas/{licenciatura}', 'LicenciaturaController@delete')->name('licenciaturas.delete')->middleware('permission:licenciaturas.delete');
+
+
+    Route::get('materias/{licenciatura}', 'MateriaController@index')->name('materias.index');
+
 });
 
 

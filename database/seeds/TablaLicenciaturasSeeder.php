@@ -18,7 +18,9 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_derecho = new App\Licenciatura([
             'nombre' => 'Licenciatura en Derecho',
-            'clave' => '001der'
+            'clave' => '001der',
+            'url_image' => '/base-biblioteca/images/Derecho.png',
+            'cuatrimestres' => 9
         ]);
 
         $licenciatura_derecho->save();
@@ -53,7 +55,9 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_administracion = new App\Licenciatura([
             'nombre' => 'Licenciatura en Administración de Empresas',
-            'clave' => '002adm'
+            'clave' => '002adm',
+            'url_image' => '/base-biblioteca/images/Administracion.jpg',
+            'cuatrimestres' => 9
         ]);
 
         $licenciatura_administracion->save();
@@ -88,7 +92,9 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_contaduria = new App\Licenciatura([
             'nombre' => 'Licenciatura en Contaduría',
-            'clave' => '003con'
+            'clave' => '003con',
+            'url_image' => '/base-biblioteca/images/Contabilidad.jpg',
+            'cuatrimestres' => 9
         ]);
 
         $licenciatura_contaduria->save();
@@ -123,7 +129,9 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_pedagogia = new App\Licenciatura([
             'nombre' => 'Licenciatura en Pedagogia',
-            'clave' => '004ped'
+            'clave' => '004ped',
+            'url_image' => '/base-biblioteca/images/Pedagogia.jpg',
+            'cuatrimestres' => 9
         ]);
 
         $licenciatura_pedagogia->save();
@@ -158,7 +166,9 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_comunicacion = new App\Licenciatura([
             'nombre' => 'Licenciatura en Ciencias de la Comunicación',
-            'clave' => '005com'
+            'clave' => '005com',
+            'url_image' => '/base-biblioteca/images/Comunicacion.jpg',
+            'cuatrimestres' => 9
         ]);
 
         $licenciatura_comunicacion->save();
@@ -193,7 +203,9 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_sistemas = new App\Licenciatura([
             'nombre' => 'Licenciatura en Sistemas Computacionales Administrativos',
-            'clave' => '006sis'
+            'clave' => '006sis',
+            'url_image' => '/base-biblioteca/images/Sistemas.jpg',
+            'cuatrimestres' => 9
         ]);
 
         $licenciatura_sistemas->save();
@@ -246,7 +258,6 @@ class TablaLicenciaturasSeeder extends Seeder
             factory(App\Libro::class)->make(),
             factory(App\Libro::class)->make()
         ]);
-
 
     }
 }
