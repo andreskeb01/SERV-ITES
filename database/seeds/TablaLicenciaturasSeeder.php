@@ -23,27 +23,32 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_derecho->save();
 
-        $licenciatura_derecho->materias()->saveMany([
-            new App\Materia([
-                'nombre' => 'Introducción al Estudio del Derecho',
-                'clave' => 'Der0101',
-                'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        $materia_introduccion_estudio_derecho = new Materia([
+            'nombre' => 'Introducción al Estudio del Derecho',
+            'clave' => 'Der0101',
+            'cuatrimestre' => 1
+        ]);
+        $materia_derecho_romano = new Materia([
                 'nombre' => 'Derecho Romano I',
                 'clave' => 'Der0102',
                 'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        ]);
+        $materia_derecho_civil = new Materia([
                 'nombre' => 'Derecho Civil',
                 'clave' => 'Der0201',
                 'cuatrimestre' => 2
-            ]),
-            new App\Materia([
+        ]);
+        $materia_derecho_penal = new Materia([
                 'nombre' => 'Derecho Penal',
                 'clave' => 'Der0202',
                 'cuatrimestre' => 2
-            ]),
+        ]);
+
+        $licenciatura_derecho->materias()->saveMany([
+            $materia_introduccion_estudio_derecho,
+            $materia_derecho_romano,
+            $materia_derecho_civil,
+            $materia_derecho_penal
         ]);
 
         $licenciatura_administracion = new App\Licenciatura([
@@ -53,27 +58,32 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_administracion->save();
 
-        $licenciatura_administracion->materias()->saveMany([
-            new App\Materia([
-                'nombre' => 'Introducción al Estudio de la Administración',
-                'clave' => 'Admin0101',
-                'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        $materia_introduccion_estudio_administracion =  new Materia([
+            'nombre' => 'Introducción al Estudio de la Administración',
+            'clave' => 'Admin0101',
+            'cuatrimestre' => 1
+        ]);
+        $materia_administracion_uno = new Materia([
                 'nombre' => 'Administración I',
                 'clave' => 'Admin0102',
                 'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        ]);
+        $materia_topicos_recursos_humanos = new Materia([
                 'nombre' => 'Tópicos de Recursos Humanos',
                 'clave' => 'Admin0201',
                 'cuatrimestre' => 2
-            ]),
-            new App\Materia([
+        ]);
+        $materia_derecho_mercantil = new Materia([
                 'nombre' => 'Derecho Mercantil',
                 'clave' => 'Admin0202',
                 'cuatrimestre' => 2
-            ]),
+        ]);
+
+        $licenciatura_administracion->materias()->saveMany([
+            $materia_introduccion_estudio_administracion,
+            $materia_administracion_uno,
+            $materia_topicos_recursos_humanos,
+            $materia_derecho_mercantil
         ]);
 
         $licenciatura_contaduria = new App\Licenciatura([
@@ -83,27 +93,32 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_contaduria->save();
 
-        $licenciatura_contaduria->materias()->saveMany([
-            new App\Materia([
-                'nombre' => 'Introducción al Estudio de la Contaduría',
-                'clave' => 'Cont0101',
-                'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        $materia_introduccion_estudio_contaduria = new Materia([
+            'nombre' => 'Introducción al Estudio de la Contaduría',
+            'clave' => 'Cont0101',
+            'cuatrimestre' => 1
+        ]);
+        $materia_contaduria_uno = new Materia([
                 'nombre' => 'Contaduría I',
                 'clave' => 'Cont0102',
                 'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        ]);
+        $materia_auditoria_contadores = new Materia([
                 'nombre' => 'Auditoria para Contadores',
                 'clave' => 'Cont0201',
                 'cuatrimestre' => 2
-            ]),
-            new App\Materia([
+        ]);
+        $materia_matematicas_dos = new Materia([
                 'nombre' => 'Matematicas II',
                 'clave' => 'Cont0202',
                 'cuatrimestre' => 2
-            ]),
+        ]);
+
+        $licenciatura_contaduria->materias()->saveMany([
+            $materia_introduccion_estudio_contaduria,
+            $materia_contaduria_uno,
+            $materia_auditoria_contadores,
+            $materia_matematicas_dos
         ]);
 
         $licenciatura_pedagogia = new App\Licenciatura([
@@ -113,27 +128,32 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_pedagogia->save();
 
-        $licenciatura_pedagogia->materias()->saveMany([
-            new App\Materia([
-                'nombre' => 'Introducción al Estudio de la Pedagogia',
-                'clave' => 'Ped0101',
-                'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        $materia_introduccion_estudio_pedagogia = new Materia([
+            'nombre' => 'Introducción al Estudio de la Pedagogia',
+            'clave' => 'Ped0101',
+            'cuatrimestre' => 1
+        ]);
+        $materia_pedagogia_uno = new Materia([
                 'nombre' => 'Pedagogia I',
                 'clave' => 'Ped0102',
                 'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        ]);
+        $materia_pedagogia_dos = new Materia([
                 'nombre' => 'Pedagogía II',
                 'clave' => 'Ped0201',
                 'cuatrimestre' => 2
-            ]),
-            new App\Materia([
+        ]);
+        $materia_topicos_enseñanza_docente = new Materia([
                 'nombre' => 'Tópicos de enseñanza docente',
                 'clave' => 'Ped0202',
                 'cuatrimestre' => 2
-            ]),
+        ]);
+
+        $licenciatura_pedagogia->materias()->saveMany([
+            $materia_introduccion_estudio_pedagogia,
+            $materia_pedagogia_uno,
+            $materia_pedagogia_dos,
+            $materia_topicos_enseñanza_docente
         ]);
 
         $licenciatura_comunicacion = new App\Licenciatura([
@@ -143,27 +163,32 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_comunicacion->save();
 
-        $licenciatura_comunicacion->materias()->saveMany([
-            new App\Materia([
-                'nombre' => 'Introducción al Estudio de la Comunicación',
-                'clave' => 'Com0101',
-                'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        $materia_introduccion_estudio_comunicacion = new Materia([
+            'nombre' => 'Introducción al Estudio de la Comunicación',
+            'clave' => 'Com0101',
+            'cuatrimestre' => 1
+        ]);
+        $materia_comunicacion_uno = new Materia([
                 'nombre' => 'Comunicación I',
                 'clave' => 'Com0102',
                 'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        ]);
+        $materia_comunicacion_dos = new Materia([
                 'nombre' => 'Comunicación II',
                 'clave' => 'Com0201',
                 'cuatrimestre' => 2
-            ]),
-            new App\Materia([
+        ]);
+        $materia_topicos_lenguaje = new Materia([
                 'nombre' => 'Tópicos de Lenguaje',
                 'clave' => 'Com0202',
                 'cuatrimestre' => 2
-            ]),
+        ]);
+
+        $licenciatura_comunicacion->materias()->saveMany([
+            $materia_introduccion_estudio_comunicacion,
+            $materia_comunicacion_uno,
+            $materia_comunicacion_dos,
+            $materia_topicos_lenguaje
         ]);
 
         $licenciatura_sistemas = new App\Licenciatura([
@@ -173,46 +198,54 @@ class TablaLicenciaturasSeeder extends Seeder
 
         $licenciatura_sistemas->save();
 
-        $licenciatura_sistemas->materias()->saveMany([
-            new App\Materia([
-                'nombre' => 'Introducción al Estudio de Sistemas',
-                'clave' => 'Sis0101',
-                'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        $materia_introduccion_estudio_sistemas = new Materia([
+            'nombre' => 'Introducción al Estudio de Sistemas',
+            'clave' => 'Sis0101',
+            'cuatrimestre' => 1
+        ]);
+        $materia_fundamentos_software = new Materia([
                 'nombre' => 'Fundamentos de Ingeniería de Sofware',
                 'clave' => 'Sis0102',
                 'cuatrimestre' => 1
-            ]),
-            new App\Materia([
+        ]);
+        $materia_calculo_integral = new Materia([
                 'nombre' => 'Cálculo Integral',
                 'clave' => 'Sis0201',
                 'cuatrimestre' => 2
-            ]),
-            new App\Materia([
+        ]);
+        $materia_programacion_objetos = new Materia([
                 'nombre' => 'Programación Orientada a Objetos',
                 'clave' => 'Sis0202',
                 'cuatrimestre' => 2
-            ]),
         ]);
 
+        $licenciatura_sistemas->materias()->saveMany([
+            $materia_introduccion_estudio_sistemas,
+            $materia_fundamentos_software,
+            $materia_calculo_integral,
+            $materia_programacion_objetos
+        ]);
         //Asignacion de Libros a materias
-
                                 //Casteo la consulta de una materia a un modelo de Materia
-        //$int_estudio_derecho = $licenciatura_derecho->materias()->find(1);
+        $materia_introduccion_estudio_derecho->libros()->saveMany([
+            factory(App\Libro::class)->make(),
+            factory(App\Libro::class)->make()
+        ]);
 
-        $collection = Materia::where('nombre', "Introducción al Estudio del Derecho")->first();
+        $materia_derecho_romano->libros()->saveMany([
+            factory(App\Libro::class)->make(),
+            factory(App\Libro::class)->make()
+        ]);
 
-        dd($collection);
-        //$libro1 = Libro::find(2);
-        //$libro2 = Libro::find(2);
-        //$int_estudio_derecho->libros()->saveMany([$libro1, $libro2]);
-        /*
-        $derecho_romano = Materia::where('nombre', 'Derecho Romano I')->first();
-        $derecho_romano->libros()->saveMany([
-            new Libro(Libro::find(3)),
-            new Libro(Libro::find(4))
-        ]);*/
+        $materia_derecho_civil->libros()->saveMany([
+            factory(App\Libro::class)->make(),
+            factory(App\Libro::class)->make()
+        ]);
+
+        $materia_derecho_penal->libros()->saveMany([
+            factory(App\Libro::class)->make(),
+            factory(App\Libro::class)->make()
+        ]);
 
 
     }
