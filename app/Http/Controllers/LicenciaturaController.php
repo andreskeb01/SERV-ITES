@@ -15,7 +15,7 @@ class LicenciaturaController extends Controller
     public function index()
     {
         //Trae todas licenciaturas  recien creadas paginadas en 10
-        $licenciaturas = Licenciatura::latest()->paginate(10);
+        $licenciaturas = Licenciatura::paginate(10);
 
         //Muestro la vista con los libros disponibles
         return view('licenciaturas.index', compact('licenciaturas'));

@@ -21,7 +21,7 @@ class DashboardController extends Controller
     }
 
     public function index(){
-        $licenciaturas = Licenciatura::latest()->paginate(10);
+        $licenciaturas = Licenciatura::paginate(10);
         return view ('dashboard_biblioteca.dashboard', compact('licenciaturas'));
     }
 

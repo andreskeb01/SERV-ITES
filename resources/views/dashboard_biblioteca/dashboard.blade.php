@@ -30,7 +30,6 @@
 
 @section('content')
 
-
     <!-- Introduction Row -->
     <div style="padding: 20px; display: flex;">
         <h3>Bienvenido</h3>
@@ -48,8 +47,14 @@
                 <h4>
                     <br>{{$licenciatura->nombre}}
                 </h4>
+                <br>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="btn-group">
+                        <a href="{{route('materias.index', $licenciatura)}}" class="btn btn-sm btn-outline-primary">Ver licenciatura</a>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Info</button>
+                    </div>
+                </div>
             </div>
-            <a href="{{route('materias.index', $licenciatura)}}" class="btn btn-sm">ver licenciatura</a>
         @empty
             <div class="alert alert-danger">
                 {{__("No tienes registrado ninguna licenciatura")}}
@@ -60,11 +65,10 @@
     </div>
     @endcan
 
-    <!-- Footer -->
-    <footer class="py-3 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-        </div>
-        <!-- /.container -->
-    </footer>
+@endsection
+
+@section('footer')
+    <div class="container">
+        <p class="m-0 text-center text-white">&copy; 2018 <strong>Instituto René Descartes.</strong> Todos los derechos reservados</p>
+    </div>
 @endsection

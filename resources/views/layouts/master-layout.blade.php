@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Servicios ITES</title>
+    <title>Servicios ITES - Biblioteca</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet">
@@ -33,18 +33,21 @@
 
 <!-- Page Content -->
 <div class="container">
-
-    @yield('content')
-
+    <div class="">
+        @yield('content')
+    </div>
 </div>
 <!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-3 bg-dark">
+    @yield('footer')
+</footer>
 
 <!-- Bootstrap core JavaScript -->
 <script src="{{asset('bootstrap/js/jquery.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.js')}}"></script>
-
-
 </body>
 
 </html>
