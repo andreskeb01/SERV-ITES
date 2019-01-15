@@ -25,11 +25,16 @@
         <div class="row justify-content-center">
             <div class="col-md8 col-md-offset-2">
                 <div class="card">
+                    <br>
+                    <p class="h4 font-weight-bold font-italic text-center" >{{$licenciatura->nombre}}</p>
                     <div class="card-header"><h5>Selecciona tu cuatrimestre</h5></div>
                     <div class="card-body">
                         <div class="d-flex">
                             <ul class="nav nav-pills flex-column" role="tablist">
-                                @for($i = 1; $i<=$licenciatura->cuatrimestres; $i++)
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#´1´_cuatrimestre" role="tab" data-toggle="tab">Cuatrimestre 1</a>
+                                </li>
+                                @for($i = 2; $i<=$licenciatura->cuatrimestres; $i++)
                                     <li class="nav-item">
                                         <a class="nav-link" href="#´{{$i}}´_cuatrimestre" role="tab" data-toggle="tab">Cuatrimestre {{$i}}</a>
                                     </li>
@@ -37,7 +42,7 @@
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content" style="width: 600px; padding-left: 25px">
-                                <div role="tabpanel" class="tab-pane fade active" id="´1´_cuatrimestre">
+                                <div role="tabpanel" class="tab-pane fade show active" id="´1´_cuatrimestre">
                                     <h6><p class="font-italic">{{$licenciatura->materias[0]->nombre}}</p></h6>
                                 </div>
                                 @for($i = 2; $i<=$licenciatura->cuatrimestres; $i++)

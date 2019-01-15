@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libro;
+use App\Licenciatura;
 use Illuminate\Http\Request;
 
 class LibroController extends Controller
@@ -28,7 +29,8 @@ class LibroController extends Controller
      */
     public function create()
     {
-        return view('libros.create');
+        $licenciaturas = Licenciatura::all();
+        return view('libros.create', compact('licenciaturas'));
     }
 
     /**
