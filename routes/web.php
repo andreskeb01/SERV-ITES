@@ -67,6 +67,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('materias/{licenciatura}', 'MateriaController@index')->name('materias.index');
 
+
+    //***************************************************************************************************************************************************************
+    //Rutas de centro de computo
+    Route::get('inventario', 'InventarioController@index')->name('inventario.index')->middleware('permission:inventario.index');
+    Route::get('inventario/create', 'InventarioController@create')->name('inventario.create')->middleware('permission:inventario.create');
+    Route::post('inventario/store', 'InventarioController@store')->name('inventario.store')->middleware('permission:inventario.create');
+    Route::get('inventario/{equipo}', 'InventarioController@show')->name('inventario.show')->middleware('permission:inventario.show');
+    Route::get('inventario/{equipo}/edit', 'InventarioController@edit')->name('inventario.edit')->middleware('permission:inventario.edit');
+    Route::put('inventario/{equipo}', 'InventarioController@update')->name('inventario.update')->middleware('permission:inventario.edit');
+    Route::delete('inventario/{equipo}', 'InventarioController@delete')->name('inventario.delete')->middleware('permission:inventario.delete');
+
 });
 
 

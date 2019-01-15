@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TablaLibrosSeeder extends Seeder
+class TablaInventarioSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,7 @@ class TablaLibrosSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Libro::class, 30)->create();
+        //Crea 10 usuarios
+        factory(\App\Inventario::class, 30)->create();
     }
 }

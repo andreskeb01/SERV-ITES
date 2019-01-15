@@ -114,12 +114,35 @@ class TablaPermisosSeeder extends Seeder
             'description'       => 'Puede acceder solo a información básica de libros'
         ]);
 
-        //Crea el rol Encargado de Centro de Computo
-        $rol_encargado_cc = Role::create([
-            'name'              => 'EncargadoCC',
-            'slug'              => 'encargadocc',
-            'description'       => 'Puede manipular todas las acciones con respecto al centro de computo'
+
+        //****************************************************************************************************
+        //Permisos de centro de computo
+        $permiso_cc_index = Permission::create([
+            'name'        => 'Navegar inventario',
+            'slug'        => 'inventario.index',
+            'description' => 'Lista y navega todos los equipos',
         ]);
+        $permiso_cc_show = Permission::create([
+            'name'        => 'Ver detalle de equipo o dispositivo',
+            'slug'        => 'inventario.show',
+            'description' => 'Ver en detalle los equipos',
+        ]);
+        $permiso_cc_create = Permission::create([
+            'name'        => 'Creacion de equipos y dispositivos',
+            'slug'        => 'inventario.create',
+            'description' => 'Crear un equipo o dispositivo',
+        ]);
+        $permiso_cc_edit = Permission::create([
+            'name'        => 'Edicion de equipo o dispositivo',
+            'slug'        => 'inventario.edit',
+            'description' => 'Editar cualquier dato de equipos',
+        ]);
+        $permiso_cc_delete = Permission::create([
+            'name'        => 'Eliminar equipo o dispositivos',
+            'slug'        => 'inventario.delete',
+            'description' => 'Eliminar cualquier dispositivo del inventario',
+        ]);
+        //***************************************************************************************************
 
         //Crea el rol Docente
         $rol_docente = Role::create([
@@ -127,6 +150,30 @@ class TablaPermisosSeeder extends Seeder
             'slug'              => 'docente',
             'description'       => 'Puede acceder solo a información básica de inventario'
         ]);
+
+        //***********************************************************************************************************
+        //Crea el rol Encargado de Centro de Computo
+        $rol_encargado_cc = Role::create([
+            'name'              => 'EncargadoCC',
+            'slug'              => 'encargadocc',
+            'description'       => 'Puede manipular todas las acciones con respecto al centro de computo'
+        ]);
+
+
+        //***********************************************************************************************************
+        //Rol  de permiso a docente
+        $rol_docente->assignPermission($permiso_cc_index);
+
+        //***********************************************************************************************************
+
+       //Rol  de permisos de encargado de computo
+        $rol_encargado_cc->assignPermission($permiso_cc_index);
+        $rol_encargado_cc->assignPermission($permiso_cc_show);
+        $rol_encargado_cc->assignPermission($permiso_cc_create);
+        $rol_encargado_cc->assignPermission($permiso_cc_edit);
+        $rol_encargado_cc->assignPermission($permiso_cc_delete);
+        //***********************************************************************************************************
+
 
         $permiso_licenciatura_index = Permission::create([
             'name'=>'Navegar Licenciaturas',
