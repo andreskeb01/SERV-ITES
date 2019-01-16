@@ -63,9 +63,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('licenciaturas/{licenciatura}/edit', 'LicenciaturaController@edit')->name('licenciaturas.edit')->middleware('permission:licenciaturas.edit');
     Route::put('licenciaturas/{licenciatura}', 'LicenciaturaController@update')->name('licenciaturas.update')->middleware('permission:licenciaturas.edit');
     Route::delete('licenciaturas/{licenciatura}', 'LicenciaturaController@delete')->name('licenciaturas.delete')->middleware('permission:licenciaturas.delete');
+    //Obtiene una licenciatura por su id proporcionado
+    Route::get('licenciatura/{id}', 'LicenciaturaController@licenciaturaById')->name('licenciaturaById.get');
 
-
+    //Permisos para materias
     Route::get('materias/{licenciatura}', 'MateriaController@index')->name('materias.index');
+    //Obtiene materias segun el cuatrimestre proporcionado
+    Route::get('materia/{cuatrimestre}/{licenciaturaId}', 'MateriaController@materiasByCuatrimestre')->name('materiasByCuatrimestre.get');
 
 
     //***************************************************************************************************************************************************************

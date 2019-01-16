@@ -20,4 +20,17 @@ class LicenciaturaController extends Controller
         //Muestro la vista con los libros disponibles
         return view('licenciaturas.index', compact('licenciaturas'));
     }
+
+    /**
+     * Regresa una licenciatura segun el id proporcionado en formato JSON
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function licenciaturaById($id)
+    {
+        $licenciatura = Licenciatura::find($id);
+
+        //Devuelvo los datos con la licenciatura obtenida
+        return response()->json($licenciatura);
+    }
 }

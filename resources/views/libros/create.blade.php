@@ -62,24 +62,14 @@
                                 </select>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col">
+                                <div class="form-group col-5">
                                     <label class="form-text" for="select_cuatrimestre">Seleccione el cuatrimestre</label>
-                                    <select class="form-control" id="select_cuatrimestre">
-                                        @foreach($licenciaturas as $licenciatura)
-                                            <option value="{{$licenciatura->id}}">
-                                                {{$licenciatura->nombre}}
-                                            </option>
-                                        @endforeach
+                                    <select class="form-control" id="select_cuatrimestre" disabled="true">
                                     </select>
                                 </div>
                                 <div class="form-group col">
                                     <label class="form-text" for="select_materia">Seleccione la materia</label>
-                                    <select class="form-control" id="select_materia">
-                                        @foreach($licenciaturas as $licenciatura)
-                                            <option value="{{$licenciatura->id}}">
-                                                {{$licenciatura->nombre}}
-                                            </option>
-                                        @endforeach
+                                    <select class="form-control" id="select_materia" disabled="true">
                                     </select>
                                 </div>
                             </div>
@@ -99,11 +89,64 @@
 @section('script')
 <script>
     $(document).ready(function () {
+
+        var select_cuatrimestre = $('#select_cuatrimestre');
+        var select_materia = $('#select_materia');
+
         //Accedo a la licenciatura seleccionada
-        $("#select_licenciatura").change(function () {
+        $("#select_licenciatura").change(function (event) {
+
+            event.preventDefault();
+
             //Guardo el id de la licenciatura seleccionada (propiedad value)
             var selected_licenciatura = $(this).children("option:selected").val();
-            $("#select_materia").prop('value', selected_licenciatura);
+
+            //Cargo la licenciatura por ajax (para ver su numero de cuatrimestres)
+            $.ajax({
+                type: 'GET',
+                url: '/licenciatura/'+selected_licenciatura,
+                success: function (response) {
+                    //Agrego los option al select de cuatrimestres
+                    for (i=1; i<=response.cuatrimestres; i++){
+                        select_cuatrimestre.append(
+                            '<option class="form-control" value="'+i+'">' +i+'</option>'
+                        );
+                    }
+                    select_cuatrimestre.prop('disabled', false);
+
+                },
+                error: function (error) {
+                  console.log(error);
+                }
+            });
+            //$("#select_materia").prop('value', selected_licenciatura);
+        });
+
+        //Accedo al cuatrimestre seleccionado
+        $("#select_cuatrimestre").change(function (event) {
+            event.preventDefault();
+            //Guardo el id del cuatrimestre seleccionado (propiedad value)
+            var selected_cuatrimestre = $(this).children("option:selected").val();
+
+            var selected_licenciatura = $('#select_licenciatura').children("option:selected").val();;
+            //Cargo las materias por ajax (con el cuatrimestre y licenciatura_id proporcionados)
+            $.ajax({
+                type: 'GET',
+                url: '/materia/'+selected_cuatrimestre+'/'+selected_licenciatura,
+                success: function (response) {
+                    response.forEach(function (item, index) {
+                        select_materia.append(
+                            '<option class="form-control" value="'+item.id+'">'+item.nombre+'</option>'
+                        );
+                    });
+                    console.log(response);
+                    select_materia.prop('disabled', false);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
         });
     });
 </script>
