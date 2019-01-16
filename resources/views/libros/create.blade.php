@@ -22,13 +22,10 @@
 @endsection
 
 @section('content')
-    @php
-        $licenciatura_value = "";
-    @endphp
     <div class="container">
         <br>
         <div class="row justify-content-center">
-            <div class="col-md8 col-md-offset-2">
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">Ingresa los datos del nuevo libro</div>
                     <div class="card-body">
@@ -38,53 +35,76 @@
                                 <input class="form-control"
                                        type="text"
                                        name="titulo"
-                                       placeholder="Titulo del Libro.">
+                                       placeholder="Titulo del libro">
                             </div>
                             <div class="form-group" >
                                 <label for="text">Autor</label>
                                 <input class="form-control"
                                        type="text"
                                        name="autor"
-                                       placeholder="Autor del Libro.">
+                                       placeholder="Autor del libro">
                             </div>
                             <div class="form-group" >
                                 <label for="text">Numero</label>
                                 <input class="form-control"
                                        type="number"
                                        name="numero_libro"
-                                       placeholder="Numero del Libro.">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Seleccione la Licenciatura</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    @foreach($licenciaturas as $licenciatura)
-                                        <option class="form-control" href="#">
-                                            {{$licenciatura_value=$licenciatura->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                       placeholder="Número del libro">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Seleccione la Materia</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <label for="select_licenciatura">Seleccione la licenciatura</label>
+                                <select class="form-control" id="select_licenciatura">
                                     @foreach($licenciaturas as $licenciatura)
-                                        @if($licenciatura->name == $licenciatura_value)
-                                        <option class="form-control" href="#">
-                                                {{$licenciatura->materias}}
+                                        <option class="form-control" value="{{$licenciatura->id}}">
+                                            {{$licenciatura->nombre}}
                                         </option>
-                                        @endif
                                     @endforeach
                                 </select>
                             </div>
-
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <label class="form-text" for="select_cuatrimestre">Seleccione el cuatrimestre</label>
+                                    <select class="form-control" id="select_cuatrimestre">
+                                        @foreach($licenciaturas as $licenciatura)
+                                            <option value="{{$licenciatura->id}}">
+                                                {{$licenciatura->nombre}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col">
+                                    <label class="form-text" for="select_materia">Seleccione la materia</label>
+                                    <select class="form-control" id="select_materia">
+                                        @foreach($licenciaturas as $licenciatura)
+                                            <option value="{{$licenciatura->id}}">
+                                                {{$licenciatura->nombre}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <br>
-                            <div class="form-group ">
+                            <div class="form-group">
                                 <button class="btn btn-primary py-1 px-3 "> Guardar </button>
                             </div>
                         </form>
                     </div>
                 </div>
+                <br>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function () {
+        //Accedo a la licenciatura seleccionada
+        $("#select_licenciatura").change(function () {
+            //Guardo el id de la licenciatura seleccionada (propiedad value)
+            var selected_licenciatura = $(this).children("option:selected").val();
+            $("#select_materia").prop('value', selected_licenciatura);
+        });
+    });
+</script>
 @endsection

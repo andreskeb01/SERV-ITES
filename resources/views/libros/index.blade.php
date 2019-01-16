@@ -27,7 +27,7 @@
                 <div class="card-header">
                     Libros disponibles
                     @can('libros.create')
-                        <a href="{{route('libros.create', $licenciaturas)}}" class="btn btn-sm btn-primary float-right">Crear</a>
+                        <a href="{{route('libros.create')}}" class="btn btn-sm btn-primary float-right">Crear</a>
                     @endcan
                 </div>
                 <div class="card-body">

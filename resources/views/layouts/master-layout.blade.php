@@ -46,8 +46,12 @@
 
 <!-- Bootstrap core JavaScript -->
 <script src="{{asset('bootstrap/js/jquery.js')}}"></script>
+<script src="{{asset('bootstrap/js/popper.min.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.js')}}"></script>
+<div id="script">
+    @yield('script')
+</div>
 </body>
 
 </html>
