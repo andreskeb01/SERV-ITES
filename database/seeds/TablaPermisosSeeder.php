@@ -218,8 +218,7 @@ class TablaPermisosSeeder extends Seeder
         $rol_encargado_biblioteca->assignPermission($permiso_licenciatura_delete);
 
         //Permisos para el rol alumno
-        $rol_alumno->assignPermission($permiso_biblioteca_index);
-        $rol_alumno->assignPermission($permiso_biblioteca_show);
+        $rol_alumno->assignPermission($permiso_licenciatura_index);
 
         //--Asignacion de roles a usuarios
 
