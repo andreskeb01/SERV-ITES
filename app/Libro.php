@@ -8,10 +8,10 @@ class Libro extends Model
 {
     protected $table = 'libros';
 
-    protected $fillable = ['libro_id', 'nombre', 'clave'];
+    protected $fillable = ['materia_id', 'titulo', 'autor', 'numero'];
 
     //me devuelve a quien estoy ligado (la tabla padre)
     public function materia(){
-        return $this->belongsTo(Materia::class, 'libro_id');
+        return $this->belongsTo(Materia::class, 'materia_id');
     }
 }

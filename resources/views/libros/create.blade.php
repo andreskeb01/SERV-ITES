@@ -29,7 +29,7 @@
                 <div class="card">
                     <div class="card-header">Ingresa los datos del nuevo libro</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('libros.store') }}">
+                        <form id="form_libro_create" method="POST" action="{{ route('libros.store') }}">
                             <div class="form-group" >
                                 <label for="text">Titulo</label>
                                 <input class="form-control"
@@ -48,14 +48,14 @@
                                 <label for="text">Numero</label>
                                 <input class="form-control"
                                        type="number"
-                                       name="numero_libro"
+                                       name="numero"
                                        placeholder="Número del libro">
                             </div>
                             <div class="form-group">
                                 <label for="select_licenciatura">Seleccione la licenciatura</label>
                                 <select class="form-control" id="select_licenciatura">
                                     @foreach($licenciaturas as $licenciatura)
-                                        <option class="form-control" value="{{$licenciatura->id}}">
+                                        <option class="form-control licenciatura_option" value="{{$licenciatura->id}}">
                                             {{$licenciatura->nombre}}
                                         </option>
                                     @endforeach
@@ -75,7 +75,7 @@
                             </div>
                             <br>
                             <div class="form-group">
-                                <button class="btn btn-primary py-1 px-3 "> Guardar </button>
+                                <button class="btn btn-primary py-1 px-3"> Guardar </button>
                             </div>
                         </form>
                     </div>
@@ -93,6 +93,10 @@
         var select_cuatrimestre = $('#select_cuatrimestre');
         var select_materia = $('#select_materia');
 
+        var options_licenciatura = $(".licenciatura_option");
+        var options_cuatrimestre = $(".cuatrimestre_option");
+        var options_materia = $(".materia_option");
+
         //Accedo a la licenciatura seleccionada
         $("#select_licenciatura").change(function (event) {
 
@@ -106,12 +110,22 @@
                 type: 'GET',
                 url: '/licenciatura/'+selected_licenciatura,
                 success: function (response) {
+
+                    //Borro los option de cuatrimestre y materia si hubiese
+                        console.log(options_cuatrimestre+""+options_materia);
+                        options_materia.remove();
+                        options_cuatrimestre.remove();
+                        //Bloqueo los select de cuatrimestre y materia
+                        select_cuatrimestre.prop('disabled', true);
+                        select_materia.prop('disabled', true);
+
                     //Agrego los option al select de cuatrimestres
                     for (i=1; i<=response.cuatrimestres; i++){
                         select_cuatrimestre.append(
-                            '<option class="form-control" value="'+i+'">' +i+'</option>'
+                            '<option class="form-control cuatrimestre_option" value="'+i+'">' +i+'</option>'
                         );
                     }
+                    //Desbloqueo el select de cuatrimestre
                     select_cuatrimestre.prop('disabled', false);
 
                 },
@@ -127,26 +141,67 @@
             event.preventDefault();
             //Guardo el id del cuatrimestre seleccionado (propiedad value)
             var selected_cuatrimestre = $(this).children("option:selected").val();
+            //Guardo el id de la licenciatura seleccionada
+            var selected_licenciatura = $('#select_licenciatura').children("option:selected").val();
 
-            var selected_licenciatura = $('#select_licenciatura').children("option:selected").val();;
             //Cargo las materias por ajax (con el cuatrimestre y licenciatura_id proporcionados)
             $.ajax({
                 type: 'GET',
                 url: '/materia/'+selected_cuatrimestre+'/'+selected_licenciatura,
                 success: function (response) {
+
+                    //Borro los option de materia si hubiese
+                    if(options_materia != undefined){
+                        options_materia.remove();
+                    }
                     response.forEach(function (item, index) {
                         select_materia.append(
-                            '<option class="form-control" value="'+item.id+'">'+item.nombre+'</option>'
+                            '<option class="form-control materia_option" value="'+item.id+'">'+item.nombre+'</option>'
                         );
                     });
-                    console.log(response);
+                    //console.log(response);
                     select_materia.prop('disabled', false);
                 },
                 error: function (error) {
                     console.log(error);
                 }
             });
+        });
 
+        //Captura el evento de clic en el boton guardar y envia
+        //el objeto libro (JSON) por AJAX a la url de libros.store
+        $("#form_libro_create").submit(function (event) {
+
+            var data = {
+                libro:{
+                    titulo: $('input[name="titulo"]').val(),
+                    autor: $('input[name="autor"]').val(),
+                    numero: $('input[name="numero"]').val()
+                },
+                materia:{
+                    id: $("#select_materia").children("option:selected").val()
+                }
+            };
+
+            console.log("Data enviada: "+data.toString());
+
+            $.ajax({
+                type: $(this).attr("method"),
+                dataType: 'json',
+                url: $(this).attr("action"),
+                data: data,
+                beforeSend: function () {
+
+                },
+                success: function (response) {
+                    console.log(response);
+                    window.location.href = "/libros";
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+            return false;
         });
     });
 </script>

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Libro;
+use App;
+
 use App\Licenciatura;
+use App\Materia;
+use App\Libro;
 use Illuminate\Http\Request;
 
 class LibroController extends Controller
@@ -41,10 +44,22 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
-        //Crea un nuevo libro a partir de los datos del request
-        $libro = Libro::create($request->all());
-        //Redirecciona al formulario para editar el libro recien creado
-        return redirect()->route('libros.edit', $libro->id)
+
+        $libroparam = $request->request->get('libro');
+        $materiaparam = $request->request->get('materia');
+
+        $libro = new Libro([
+            'titulo' => $libroparam['titulo'],
+            'autor' => $libroparam['autor'],
+            'numero' => $libroparam['numero'],
+        ]);
+        //Busco la materia con el id y lo relaciono al libro creado
+        $materia = Materia::find($materiaparam['id']);
+        $libro->materia()->associate($materia);
+        $libro->save();
+
+        //Redirecciona a la vista de libros
+        return redirect()->route('libros.index')
             ->with('info', 'Libro guardado con éxito');
     }
 

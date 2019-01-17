@@ -8,10 +8,10 @@ class Materia extends Model
 {
     protected $table = 'materias';
 
-    protected $fillable = ['materia_id', 'nombre', 'clave', 'cuatrimestre'];
+    protected $fillable = ['licenciatura_id', 'nombre', 'clave', 'cuatrimestre'];
 
     public function licenciatura(){
-        return $this->belongsTo(Licenciatura::class, 'materia_id');
+        return $this->belongsTo(Licenciatura::class, 'licenciatura_id');
     }
 
     public function libros(){

@@ -5,6 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Servicios ITES - Biblioteca</title>
 
     <!-- Bootstrap core CSS -->
@@ -49,6 +50,11 @@
 <script src="{{asset('bootstrap/js/popper.min.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.js')}}"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+    });
+</script>
 <div id="script">
     @yield('script')
 </div>
