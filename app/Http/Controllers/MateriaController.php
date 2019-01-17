@@ -25,7 +25,7 @@ class MateriaController extends Controller
      */
     public function materiasByCuatrimestre($cuatrimestre, $licenciaturaId)
     {
-        $materias = $users = DB::table('materias')->where([
+        $materias = DB::table('materias')->where([
             ['cuatrimestre', '=', $cuatrimestre],
             ['licenciatura_id', '=', $licenciaturaId],
         ])->get();

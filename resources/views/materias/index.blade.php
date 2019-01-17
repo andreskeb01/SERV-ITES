@@ -23,7 +23,7 @@
     <div class="container">
         <br>
         <div class="row justify-content-center">
-            <div class="col-md8 col-md-offset-2">
+            <div class="col-lg-6 col-md-offset-2">
                 <div class="card">
                     <br>
                     <p class="h4 font-weight-bold font-italic text-center" >{{$licenciatura->nombre}}</p>
@@ -41,17 +41,21 @@
                                 @endfor
                             </ul>
                             <!-- Tab panes -->
-                            <div class="tab-content" style="width: 600px; padding-left: 25px">
+                            <div class="tab-content" style="padding-left: 25px">
                                 <div role="tabpanel" class="tab-pane fade show active" id="´1´_cuatrimestre">
                                     <h6><p class="font-italic">{{$licenciatura->materias[0]->nombre}}</p></h6>
                                 </div>
                                 @for($i = 2; $i<=$licenciatura->cuatrimestres; $i++)
                                     <div role="tabpanel" class="tab-pane fade in active" id="´{{$i}}´_cuatrimestre">
+                                        <ul class="nav nav-pills flex-column" role="tablist">
                                         @foreach($licenciatura->materias as $materia)
                                             @if($materia->cuatrimestre==$i)
-                                                <h6><p class="font-italic">{{$materia->nombre}}</p></h6>
+                                                <li class="nav-item">
+                                                        <a class="nav-link" role="tab" data-toggle="tab"> {{$materia->nombre}}</a>
+                                                    </li>
                                             @endif
                                         @endforeach
+                                        </ul>
                                     </div>
                                 @endfor
                             </div>
@@ -67,3 +71,24 @@
     </div>
 </div>
 @endsection
+
+@section('script')
+    <script type="text/javascript">
+        $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+            }
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass('show');
+
+
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+                $('.dropdown-submenu .show').removeClass("show");
+            });
+
+
+            return false;
+        });
+    </script>
+@endsection
+
