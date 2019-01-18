@@ -14,9 +14,12 @@ class LoginController extends Controller
         $this->middleware('guest', ['only' => 'showLoginForm']);
     }
 
-    public function showLoginForm()
+    public function showLoginForm($option)
     {
-        return view( 'auth.login');
+        if($option == 1){
+            return view( 'auth.login');
+        }
+        else return view( 'auth.logincc');
     }
 
     public function autenticar()

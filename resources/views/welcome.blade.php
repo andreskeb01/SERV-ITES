@@ -78,8 +78,8 @@
                 <br>
                 <br>
                 <div class="links">
-                    <a href="{{ route('login_index') }}">Servicios Bibliotecarios</a>
-                    <a href="{{ route('login_index') }}">Servicios Centro de Cómputo</a>
+                    <a href="{{ route('login_index', ['option' => 1])  }}">Servicios Bibliotecarios</a>
+                    <a href="{{ route('login_index', ['option' => 2]) }}">Servicios Centro de Cómputo</a>
                 </div>
             </div>
         </div>
