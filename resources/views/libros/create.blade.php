@@ -113,11 +113,13 @@
 
                     //Borro los option de cuatrimestre y materia si hubiese
                         console.log(options_cuatrimestre+""+options_materia);
+                        options_cuatrimestre = $(".cuatrimestre_option");
+                        options_materia = $(".materia_option");
                         options_materia.remove();
                         options_cuatrimestre.remove();
                         //Bloqueo los select de cuatrimestre y materia
                         select_cuatrimestre.prop('disabled', true);
-                        select_materia.prop('disabled', true);
+                     //   select_materia.prop('disabled', true);
 
                     //Agrego los option al select de cuatrimestres
                     for (i=1; i<=response.cuatrimestres; i++){
@@ -152,6 +154,7 @@
 
                     //Borro los option de materia si hubiese
                     if(options_materia != undefined){
+                        options_materia = $(".materia_option");
                         options_materia.remove();
                     }
                     response.forEach(function (item, index) {
