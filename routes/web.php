@@ -16,12 +16,17 @@ Route::get('/', function () {
 });
 Route::group(['namespace' => 'Auth', 'prefix' => '' ], function ()
 {
-    Route::get('/login/{option}', 'LoginController@showLoginForm')->name('login_index');
+    Route::get('/login', 'LoginController@showLoginForm')->name('login_index');
     Route::post('/login', 'LoginController@autenticar')->name('login_autenticar');
     Route::post('/logout', 'LoginController@cerrarSesion')->name('cerrar_sesion');
+
+    Route::get('/logincomputo', 'LoginComputoController@showLoginComputoForm')->name('login_computo_index');
+    Route::post('/logincomputo', 'LoginComputoController@autenticar')->name('login_computo_autenticar');
+    Route::post('/computologout', 'LoginComputoController@cerrarSesion')->name('computo_cerrar_sesion');
 });
 
 Route::get ('/biblioteca', 'DashboardBiblioteca\DashboardController@index')->name('biblioteca');
+Route::get ('/centrocomputo', 'DashboardCentroComputo\DashboardController@index')->name('centrocomputo');
 
 //Rutas con el middleware Permisos
 Route::middleware(['auth'])->group(function () {

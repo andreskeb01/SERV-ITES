@@ -13,7 +13,7 @@ class CreateInventariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('inventarios', function (Blueprint $table) {
+        Schema::create('inventario', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->string('num_serie');

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
-class LoginController extends Controller
+class LoginComputoController extends Controller
 {
 
     public function __construct()
@@ -14,9 +14,9 @@ class LoginController extends Controller
         $this->middleware('guest', ['only' => 'showLoginForm']);
     }
 
-    public function showLoginForm()
+    public function showLoginComputoForm()
     {
-        return view( 'auth.login');
+        return view( 'auth.logincc');
     }
 
     public function autenticar()
@@ -37,7 +37,7 @@ class LoginController extends Controller
            //role_id : 4 =  EncargadoCC
            //role_id : 5 =  Docente
 
-               return redirect()->route('biblioteca' );
+               return redirect()->route('centrocomputo' );
 
             //Ver posibilidad de redirigir al super admin a un menu para las 3 vistas con otro elseif(users, biblioteca cc)
 
