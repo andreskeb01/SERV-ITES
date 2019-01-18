@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use function Symfony\Component\HttpKernel\Tests\Controller\controller_function;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -31,8 +31,23 @@ class LoginController extends Controller
 
 
        if( Auth::attempt($credentials)){
-           $user =
-           return redirect()->route('biblioteca' );
+           $user = Auth::user();
+           $id_rol_usuario = DB::table('role_user')->where([['user_id', '=', $user->id]])->first();
+           //Roles id
+           //role_id : 1 =  SuperAdmin
+           //role_id : 2 =  EncargadoBiblioteca
+           //role_id : 3 =  Alumno
+           //role_id : 4 =  EncargadoCC
+           //role_id : 5 =  Docente
+           if($id_rol_usuario == '2' || $id_rol_usuario == '3')
+           {
+               return redirect()->route('biblioteca' );
+           }elseif ($id_rol_usuario == '4' || $id_rol_usuario == '5')
+           {
+               return redirect()->route('centrocomputo' );
+           }
+            //Ver posibilidad de redirigir al super admin a un menu para las 3 vistas con otro elseif(users, biblioteca cc)
+
        } else return back()
            ->withErrors(['usuario_invalido'=>'fallo la autenticacion'])
            ->withInput(request(['email']));

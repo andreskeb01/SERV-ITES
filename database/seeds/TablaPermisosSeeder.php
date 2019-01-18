@@ -142,14 +142,6 @@ class TablaPermisosSeeder extends Seeder
             'slug'        => 'inventario.delete',
             'description' => 'Eliminar cualquier dispositivo del inventario',
         ]);
-        //***************************************************************************************************
-
-        //Crea el rol Docente
-        $rol_docente = Role::create([
-            'name'              => 'Docente',
-            'slug'              => 'docente',
-            'description'       => 'Puede acceder solo a información básica de inventario'
-        ]);
 
         //***********************************************************************************************************
         //Crea el rol Encargado de Centro de Computo
@@ -158,6 +150,16 @@ class TablaPermisosSeeder extends Seeder
             'slug'              => 'encargadocc',
             'description'       => 'Puede manipular todas las acciones con respecto al centro de computo'
         ]);
+
+        //***************************************************************************************************
+        //Crea el rol Docente
+        $rol_docente = Role::create([
+            'name'              => 'Docente',
+            'slug'              => 'docente',
+            'description'       => 'Puede acceder solo a información básica de inventario'
+        ]);
+
+
 
 
         //***********************************************************************************************************
@@ -221,6 +223,15 @@ class TablaPermisosSeeder extends Seeder
         $rol_alumno->assignPermission($permiso_licenciatura_index);
 
         //--Asignacion de roles a usuarios
+
+        //Rol de superaministrador
+        $usuario_encargado_computo = factory(User::class)->create([
+            'name' => 'Encargado de Cómputo',
+            'email' => '13470522@itcampeche.edu.mx',
+            'password' => bcrypt('centrocomputo')
+        ]);
+
+        $usuario_encargado_computo->roles()->attach($rol_encargado_cc);
 
         //Rol de encargado de biblioteca
         $usuario_encargado_biblioteca = factory(User::class)->create([
