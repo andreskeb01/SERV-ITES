@@ -45,63 +45,56 @@
                                 <div role="tabpanel" class="tab-pane fade show active" id="´1´_cuatrimestre">
                                     <div class="d-flex">
                                         <ul class="nav nav-pills flex-column" role="tablist">
-                                          <li class="nav-item">
-                                            <a class="nav-link" href="#´1´_materia" role="tab" data-toggle="tab">
-                                             @foreach($licenciatura->materias as $materia)
-                                                   @if($materia->cuatrimestre==1)
-                                                    {{$materia->nombre}}
-                                                    @endif
-                                             @endforeach
-                                             </a>
-                                          </li>
+                                        @php $item_nav_materia = 1; @endphp
+                                        @foreach($licenciatura->materias->where('cuatrimestre', 1)->all() as $materia)
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#´{{$item_nav_materia}}´_materia" role="tab" data-toggle="tab">{{$materia->nombre}}</a>
+                                            </li>
+                                         @php $item_nav_materia++; @endphp
+                                        @endforeach
                                         </ul>
+                                        <div class="tab-content" style="padding-left: 15px">
+                                            @php $panel_tab_materia = 1; @endphp
+                                            @foreach($licenciatura->materias->where('cuatrimestre', 1)->all() as $materia)
+                                                <div role="tabpanel" class="tab-pane fade" id="´{{$panel_tab_materia}}´_materia">
+                                                    <ol>
+                                                    @foreach($materia->libros as $libro)
+                                                      <li>{{$libro->titulo}} | <a href="{{route('libros.show', $libro->id)}}">Ver detalle</a></li>
+                                                    @endforeach
+                                                    </ol>
+                                                </div>
+                                                @php $panel_tab_materia++; @endphp
+                                            @endforeach
+                                        </div>
                                     </div>
-
                                 </div>
                                 @for($i = 2; $i<=$licenciatura->cuatrimestres; $i++)
                                     <div role="tabpanel" class="tab-pane fade in active" id="´{{$i}}´_cuatrimestre">
                                         <div class="d-flex">
                                             <ul class="nav nav-pills flex-column" role="tablist">
-                                                @php
-                                                $m=1;
-                                                @endphp
+                                               @php $m=1; @endphp
                                                @foreach($licenciatura->materias as $materia)
-                                                @if($materia->cuatrimestre==$i)
-                                                <li class="nav-item">
-                                                        <a class="nav-link" href="#´{{$m}}´_materia" role="tab" data-toggle="tab"> {{$materia->nombre}}</a>
-                                                    </li>
-                                                @endif
-                                                   @php
-                                                   $m++;
-                                                   @endphp
+                                                    @if($materia->cuatrimestre==$i)
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="#´{{$m}}´_materia" role="tab" data-toggle="tab"> {{$materia->nombre}}</a>
+                                                        </li>
+                                                    @endif
+                                                    @php $m++; @endphp
                                                 @endforeach
                                             </ul>
                                             <div class="tab-content" style="padding-left: 15px">
-                                              <div role="tabpanel" class="tab-pane fade" id="´1´_materia">
-                                                  @foreach($licenciatura->materias as $materia)
-                                                      @if( $materia->cuatrimestre==1)
-                                                          @foreach($materia->libros as $libro)
-                                                          {{$libro->titulo}}
-                                                          @endforeach
-                                                          @break
-                                                      @endif
-                                                  @endforeach
-                                              </div>
-
-                                                @php
-                                                    $m2=1;
-                                                @endphp
+                                                @php $m2=1; @endphp
                                                 @foreach($licenciatura->materias as $materia)
                                                     @if($materia->cuatrimestre==$i)
                                                         <div role="tabpanel" class="tab-pane fade" id="´{{$m2}}´_materia">
+                                                            <ol>
                                                             @foreach($materia->libros as $libro)
-                                                                {{$libro->titulo}} <br>
+                                                                <li>{{$libro->titulo}} | <a href="{{route('libros.show', $libro->id)}}">Ver detalle</a></li>
                                                             @endforeach
+                                                            </ol>
                                                         </div>
                                                     @endif
-                                                    @php
-                                                    $m2++;
-                                                    @endphp
+                                                    @php $m2++; @endphp
                                                 @endforeach
                                             </div>
                                         </div>
