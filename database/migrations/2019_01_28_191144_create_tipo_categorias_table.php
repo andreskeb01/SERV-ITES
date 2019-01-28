@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriasTable extends Migration
+class CreateTipoCategoriasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,12 @@ class CreateCategoriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('categorias', function (Blueprint $table) {
+        Schema::create('tipo_categorias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->unique();
-            $table->string('descripcion');
-            $table->unsignedInteger('tipo_id')->nullable();
-            $table->foreign('tipo_id')->references('id')->on('tipo_categorias');
+            $table->string('tipo')->unique();
             $table->timestamps();
         });
     }
-
-
-
 
     /**
      * Reverse the migrations.
@@ -33,6 +27,6 @@ class CreateCategoriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categorias');
+        Schema::dropIfExists('tipo_categorias');
     }
 }

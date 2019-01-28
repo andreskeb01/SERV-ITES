@@ -42,12 +42,33 @@
     @can('inventario.index')
     <!-- Seccion de inventario -->
 
-    <div class="pull-right">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+
+<!---->
+    <div class="form-row">
+        <div class="form-group col-5">
+            <label class="form-text" for="select_cuatrimestre">Categoria de dispositivo</label>
+            <select class="form-control" id="select_cuatrimestre" disabled="true">
+            </select>
+        </div>
+        <div class="form-group col">
+            <label class="form-text" for="select_materia">Tipo</label>
+            <select class="form-control" id="select_materia" disabled="true">
+            </select>
+        </div>
+
+        <div class="form-group col">
+            <form class="form-inline">
+                <label class="form-text" for="input_busqueda">Busqueda</label>
+                <div id="input_busqueda" class="form-group pt-2">
+                    <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+                </div>
+
+            </form>
+        </div>
     </div>
+    <br>
 
     <div class="row">
         <div class="card-body">
@@ -94,6 +115,7 @@
                     <tr class="alert alert-danger">
                         {{__("No tienes ningun dispositivo")}}
                     </tr>
+
                 @endforelse
                 </tbody>
             </table>
