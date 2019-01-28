@@ -59,11 +59,11 @@ class TablaCategoriasSeeder extends Seeder
         $cable->save();
 
         $alambrico = new TipoCategoria([
-            'nombre' => 'alambrico'
+            'tipo' => 'alambrico'
         ]);
 
         $inalambrico = new TipoCategoria([
-            'nombre' => 'inalambrico'
+            'tipo' => 'inalambrico'
         ]);
 
         $mouse->tipos()->saveMany([
@@ -77,11 +77,11 @@ class TablaCategoriasSeeder extends Seeder
         ]);
 
         $proyector = new TipoCategoria([
-            'nombre' => 'proyector'
+            'tipo' => 'proyector'
         ]);
 
         $tv = new TipoCategoria([
-            'nombre' => 'tv'
+            'tipo' => 'tv'
         ]);
 
         $control->tipos()->saveMany([
@@ -90,11 +90,11 @@ class TablaCategoriasSeeder extends Seeder
         ]);
 
         $vga = new TipoCategoria([
-            'nombre' => 'vga'
+            'tipo' => 'vga'
         ]);
 
         $hdmi = new TipoCategoria([
-            'nombre' => 'hdmi'
+            'tipo' => 'hdmi'
         ]);
 
         $cable->tipos()->saveMany([

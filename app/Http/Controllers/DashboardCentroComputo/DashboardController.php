@@ -9,8 +9,10 @@
 namespace App\Http\Controllers\DashboardCentroComputo;
 
 
+use App\Categoria;
 use App\Http\Controllers\Controller;
 use App\Inventario;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -21,8 +23,19 @@ class DashboardController extends Controller
     }
 
     public function index(){
+        $categorias = Categoria::all();
         $inventario = Inventario::all();
-        return view ('dashboard_cc.dashboard', compact('inventario'));
+        return view ('dashboard_cc.dashboard', compact('inventario','categorias'));
+    }
+
+    public function tipoByCategoria($categoriaId)
+    {
+        $tipos = DB::table('tipo_categorias')->where([
+            ['categoria_id', '=', $categoriaId],
+        ])->get();
+
+        //Devuelvo los datos con los tipos obtenidos
+        return response()->json($tipos);
     }
 
 }

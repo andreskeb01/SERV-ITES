@@ -16,6 +16,8 @@ class CreateTipoCategoriasTable extends Migration
         Schema::create('tipo_categorias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tipo')->unique();
+            $table->unsignedInteger('categoria_id')->nullable();
+            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
         });
     }

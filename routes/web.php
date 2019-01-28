@@ -76,6 +76,11 @@ Route::middleware(['auth'])->group(function () {
     //Obtiene materias segun el cuatrimestre proporcionado
     Route::get('materia/{cuatrimestre}/{licenciaturaId}', 'MateriaController@materiasByCuatrimestre')->name('materiasByCuatrimestre.get');
 
+    Route::group(['namespace' => 'DashboardCentroComputo'], function ()
+    {
+        //Obtiene tipos de categorias segun la categoria proporcionada
+        Route::get('categorias/{categoriaId}', 'DashboardController@tipoByCategoria')->name('tipoByCategoria.get');
+    });
 
     //***************************************************************************************************************************************************************
     //Rutas de centro de computo

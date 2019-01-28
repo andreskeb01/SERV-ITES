@@ -135,7 +135,6 @@
                   console.log(error);
                 }
             });
-            //$("#select_materia").prop('value', selected_licenciatura);
         });
 
         //Accedo al cuatrimestre seleccionado

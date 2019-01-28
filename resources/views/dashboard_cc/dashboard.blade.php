@@ -45,26 +45,26 @@
 
 <!---->
     <div class="form-row">
-        <div class="form-group col-5">
-            <label class="form-text" for="select_cuatrimestre">Categoria de dispositivo</label>
-            <select class="form-control" id="select_cuatrimestre" disabled="true">
+        <div class="form-group col-lg-3">
+            <label class="form-text" for="select_categoria">Categoria de dispositivo</label>
+            <select class="form-control" id="select_categoria">
+                @foreach($categorias as $categoria)
+                    <option class="form-control" value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                @endforeach
             </select>
         </div>
-        <div class="form-group col">
-            <label class="form-text" for="select_materia">Tipo</label>
-            <select class="form-control" id="select_materia" disabled="true">
+        <div class="form-group col-lg-2">
+            <label class="form-text" for="select_tipo">Tipo</label>
+            <select class="form-control" id="select_tipo" disabled="true">
             </select>
         </div>
-
-        <div class="form-group col">
+        <div class="form-group col-lg-4 offset-md-3">
+            <label class="form-text" for="input_busqueda">Búsqueda por nombre</label>
             <form class="form-inline">
-                <label class="form-text" for="input_busqueda">Busqueda</label>
-                <div id="input_busqueda" class="form-group pt-2">
-                    <input  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
+                <div id="input_busqueda" class="form-group">
+                    <input  class="form-control px-5 mr-sm-2" type="search" placeholder="Ej. HP, Mac, etc" aria-label="Search">
+                    <button class="btn btn-outline-primary " type="submit">Buscar</button>
                 </div>
-
             </form>
         </div>
     </div>
@@ -130,4 +130,56 @@
     <div class="container">
         <p class="m-0 text-center text-white">&copy; 2018 <strong>Instituto René Descartes.</strong> Todos los derechos reservados</p>
     </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function () {
+        //Obtiene el select de categorias
+        var select_categoria = $("#select_categoria");
+        var select_tipo = $("#select_tipo");
+
+        var options_tipo = $(".tipo_option");
+
+        //Cuando se cambia el valor del option seleccionado se
+        //guarda la opcion seleccionada
+        select_categoria.change(function (event) {
+            //Evita que se recargue la pagina
+            event.preventDefault();
+
+            //Guardo el id de la categoria seleccionada (propiedad value)
+            var categoria_seleccionada = $(this).children("option:selected").val();
+
+            //Cargo los tipos de categorias por ajax (para ver los tipos disponibles)
+            $.ajax({
+                type: 'GET',
+                url: '/categorias/'+categoria_seleccionada,
+                success: function (response) {
+
+                    options_tipo = $(".tipo_option");
+                    options_tipo.remove();
+                    //Bloqueo los select de cuatrimestre y materia
+                    select_tipo.prop('disabled', true);
+
+                    //console.log(response);
+
+                    //Agrego los option al select de cuatrimestres
+                    response.forEach(function(value, index){
+                        select_tipo.append(
+                            '<option class="form-control tipo_option" value="'+value.id+'">' +value.tipo+'</option>'
+                        );
+                    });
+                    //Desbloqueo el select de tipos
+                    select_tipo.prop('disabled', false);
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        });
+
+    });
+</script>
 @endsection
