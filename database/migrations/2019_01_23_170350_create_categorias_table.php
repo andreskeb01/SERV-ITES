@@ -17,6 +17,8 @@ class CreateCategoriasTable extends Migration
             $table->increments('id');
             $table->string('nombre')->unique();
             $table->string('descripcion');
+            $table->unsignedInteger('inventario_id')->nullable();
+            $table->foreign('inventario_id')->references('id')->on('inventario');
             $table->timestamps();
         });
     }

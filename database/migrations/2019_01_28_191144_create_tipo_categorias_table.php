@@ -18,7 +18,11 @@ class CreateTipoCategoriasTable extends Migration
             $table->string('tipo')->unique();
             $table->unsignedInteger('categoria_id')->nullable();
             $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->unsignedInteger('inventario_id')->nullable();
+            $table->foreign('inventario_id')->references('id')->on('inventario');
             $table->timestamps();
+
+
         });
     }
 
@@ -27,8 +31,10 @@ class CreateTipoCategoriasTable extends Migration
      *
      * @return void
      */
+
     public function down()
     {
         Schema::dropIfExists('tipo_categorias');
     }
 }
+

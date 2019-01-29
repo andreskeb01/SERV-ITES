@@ -84,39 +84,8 @@
                     <th colspan="3">&nbsp;</th>
                 </tr>
                 </thead>
-                <tbody>
-                @forelse($inventario as $dispositivo)
-                    <tr>
-                        <td>{{$dispositivo->id}}</td>
-                        <td>{{$dispositivo->nombre}}</td>
-                        <td>{{$dispositivo->num_serie}}</td>
-                        <td>{{$dispositivo->modelo}}</td>
-                        <td>{{$dispositivo->descripcion}}</td>
-                        <td>{{$dispositivo->clave}}</td>
-                        <td>
-                            @can('inventario.show')
-                                <a href="{{route('inventario.show', $dispositivo->id)}}" class="btn btn-sm">Ver</a>
-                            @endcan
-                        </td>
-                        <td>
-                            @can('inventario.edit')
-                                <a href="{{route('inventario.edit', $dispositivo->id)}}" class="btn btn-sm">Editar</a>
-                            @endcan
-                        </td>
-                        <td>
-                            @can('inventario.delete')
-                                {!! Form::open(['route' => ['inventario.delete', $dispositivo->id], 'method' => 'DELETE']) !!}
-                                <button class="btn btn-sm btn-danger">Eliminar</button>
-                                {!! Form::close() !!}
-                            @endcan
-                        </td>
-                    </tr>
-                @empty
-                    <tr class="alert alert-danger">
-                        {{__("No tienes ningun dispositivo")}}
-                    </tr>
+                <tbody id="tabla_inventario">
 
-                @endforelse
                 </tbody>
             </table>
         </div>
@@ -140,6 +109,7 @@
         var select_tipo = $("#select_tipo");
 
         var options_tipo = $(".tipo_option");
+        var body_inventario =$ ("#tabla_inventario");
 
         //Cuando se cambia el valor del option seleccionado se
         //guarda la opcion seleccionada
@@ -149,6 +119,7 @@
 
             //Guardo el id de la categoria seleccionada (propiedad value)
             var categoria_seleccionada = $(this).children("option:selected").val();
+            console.log(select_tipo);
 
             //Cargo los tipos de categorias por ajax (para ver los tipos disponibles)
             $.ajax({
@@ -160,8 +131,35 @@
                     options_tipo.remove();
                     //Bloqueo los select de cuatrimestre y materia
                     select_tipo.prop('disabled', true);
+                    if(Object.keys(response).length === 0 ){
+                        console.log("el response esta vacio");
+                        $.ajax({
+                            type: 'GET',
+                            url: '/inventario/'+categoria_seleccionada,
+                            success: function (response) {
+                                body_inventario.append(
+                                '<tr>'
+                                    '<td>''</td>'
+                                    '<td>''</td>'
+                                    '<td>''</td>'
+                                    '<td>''</td>'
+                                    '<td>''</td>'
+                                    '<td>''</td>'
 
-                    //console.log(response);
+                                '</tr>');
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+
+
+
+
+                        })
+
+                    }
+
+
 
                     //Agrego los option al select de cuatrimestres
                     response.forEach(function(value, index){

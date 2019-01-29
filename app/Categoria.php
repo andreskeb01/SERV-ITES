@@ -14,5 +14,8 @@ class Categoria extends Model
         return $this->hasMany(TipoCategoria::class);
     }
 
+    public function inventario(){
+        return $this->belongsTo(Inventario::class, 'inventario_id');
+    }
 
 }

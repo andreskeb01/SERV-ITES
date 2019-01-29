@@ -38,4 +38,16 @@ class DashboardController extends Controller
         return response()->json($tipos);
     }
 
+    public function dispositivosByCategorias($categoriaId, $tipoId){
+
+    $dispositivos = null;
+        if($tipoId == null){
+            $dispositivos = DB::table('inventario')->where([
+              ['id', '=', $categoriaId],
+            ])->get();
+        }
+        return response()->json($dispositivos);
+    }
+
+
 }
