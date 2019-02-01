@@ -8,6 +8,7 @@ use App\Licenciatura;
 use App\Materia;
 use App\Libro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LibroController extends Controller
 {
@@ -58,9 +59,15 @@ class LibroController extends Controller
         $libro->materia()->associate($materia);
         $libro->save();
 
+        //IMAGE
+        $path= Storage::disk('public')->put('image', $request->request->get('file'));
+        $libro->fill(['url_image' => asset($path)])->save();
+
+
         //Redirecciona a la vista de libros
         return redirect()->route('libros.index')
             ->with('info', 'Libro guardado con éxito');
+
     }
 
     /**
