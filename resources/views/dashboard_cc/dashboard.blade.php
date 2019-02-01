@@ -119,7 +119,6 @@
 
             //Guardo el id de la categoria seleccionada (propiedad value)
             var categoria_seleccionada = $(this).children("option:selected").val();
-            console.log(select_tipo);
 
             //Cargo los tipos de categorias por ajax (para ver los tipos disponibles)
             $.ajax({
@@ -129,39 +128,8 @@
 
                     options_tipo = $(".tipo_option");
                     options_tipo.remove();
-                    //Bloqueo los select de cuatrimestre y materia
-                    select_tipo.prop('disabled', true);
-                    if(Object.keys(response).length === 0 ){
-                        console.log("el response esta vacio");
-                        $.ajax({
-                            type: 'GET',
-                            url: '/inventario/'+categoria_seleccionada,
-                            success: function (response) {
-                                body_inventario.append(
-                                '<tr>'
-                                    '<td>''</td>'
-                                    '<td>''</td>'
-                                    '<td>''</td>'
-                                    '<td>''</td>'
-                                    '<td>''</td>'
-                                    '<td>''</td>'
 
-                                '</tr>');
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
-
-
-
-
-                        })
-
-                    }
-
-
-
-                    //Agrego los option al select de cuatrimestres
+                    //Agrego los option al select de tipos
                     response.forEach(function(value, index){
                         select_tipo.append(
                             '<option class="form-control tipo_option" value="'+value.id+'">' +value.tipo+'</option>'
@@ -170,14 +138,30 @@
                     //Desbloqueo el select de tipos
                     select_tipo.prop('disabled', false);
 
+                    //Si no hay tipos en el response solo filtramos equipos por Categoria
+                    if(Object.keys(response).length === 0 ){
+                        var tipo_seleccionado = null;
+
+                        $.ajax({
+                            type: 'GET',
+                            url: 'inventarios/'+categoria_seleccionada+'/'+tipo_seleccionado,
+                            success: function (response) {
+                                console.log(response);
+                                body_inventario.append(
+                                    '<tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>');
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        });
+                    }
+
                 },
                 error: function (error) {
                     console.log(error);
                 }
             });
-
         });
-
     });
 </script>
 @endsection

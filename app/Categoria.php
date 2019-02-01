@@ -10,12 +10,18 @@ class Categoria extends Model
 
     protected $fillable = ['nombre', 'descripcion'];
 
-    public function tipos(){
-        return $this->hasMany(TipoCategoria::class);
+    public function tipos()
+    {
+        return $this->belongsToMany(Tipo::class,'categoria_tipo')
+                    ->withPivot('tipo_id')
+                    ->withTimestamps();
     }
 
-    public function inventario(){
-        return $this->belongsTo(Inventario::class, 'inventario_id');
+    public function inventarios()
+    {
+        return $this->belongsToMany(Inventario::class,'inventario_categoria_tipo')
+            ->withPivot('inventario_id')
+            ->withTimestamps();
     }
 
 }

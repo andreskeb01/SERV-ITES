@@ -80,6 +80,8 @@ Route::middleware(['auth'])->group(function () {
     {
         //Obtiene tipos de categorias segun la categoria proporcionada
         Route::get('categorias/{categoriaId}', 'DashboardController@tipoByCategoria')->name('tipoByCategoria.get');
+        //Obtiene dispositivos segun la categoria y tipo proporcionados
+        Route::get('inventarios/{categoriaId}/{tipoId}', 'DashboardController@byCategoriaTipo')->name('byCategoriaTipo.get');
     });
 
     //***************************************************************************************************************************************************************

@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\DashboardCentroComputo;
 
-
 use App\Categoria;
 use App\Http\Controllers\Controller;
 use App\Inventario;
@@ -30,23 +29,27 @@ class DashboardController extends Controller
 
     public function tipoByCategoria($categoriaId)
     {
-        $tipos = DB::table('tipo_categorias')->where([
-            ['categoria_id', '=', $categoriaId],
-        ])->get();
+        $categoria = Categoria::find($categoriaId);
+        $tipos = $categoria->tipos()->get();
 
         //Devuelvo los datos con los tipos obtenidos
         return response()->json($tipos);
     }
 
-    public function dispositivosByCategorias($categoriaId, $tipoId){
+    public function byCategoriaTipo($categoriaId, $tipoId)
+    {
+        $categoria = Categoria::find($categoriaId);
+        $dispositivos = null;
 
-    $dispositivos = null;
-        if($tipoId == null){
-            $dispositivos = DB::table('inventario')->where([
-              ['id', '=', $categoriaId],
-            ])->get();
+        if($tipoId == "null")
+        {
+            $dispositivos = $categoria->inventarios()->get();
+            return response()->json($dispositivos);
+        }else
+        {
+            return response()->json(["value" => $tipoId]);
         }
-        return response()->json($dispositivos);
+
     }
 
 

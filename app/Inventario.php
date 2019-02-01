@@ -8,11 +8,8 @@ class Inventario extends Model
 {
     protected $table = 'inventario';
 
-    public function categoria(){
-        return $this->hasOne(Categoria::class);
-    }
+    protected $fillable = ['nombre', 'num_serie', 'modelo', 'descripcion', 'clave'];
 
-    public function tipoCategoria(){
-        return $this->hasOne(TipoCategoria::class);
-    }
+    
+
 }
