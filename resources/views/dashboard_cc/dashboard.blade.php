@@ -72,22 +72,9 @@
 
     <div class="row">
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="">
-                <tr>
-                    <th with="10px">ID</th>
-                    <th>Nombre</th>
-                    <th>Num serie</th>
-                    <th>Modelo</th>
-                    <th>Descripcion</th>
-                    <th>Clave</th>
-                    <th colspan="3">&nbsp;</th>
-                </tr>
-                </thead>
-                <tbody id="tabla_inventario">
+            <div id="tabla_inventario_content">
 
-                </tbody>
-            </table>
+            </div>
         </div>
 
     </div>
@@ -109,7 +96,7 @@
         var select_tipo = $("#select_tipo");
 
         var options_tipo = $(".tipo_option");
-        var body_inventario =$ ("#tabla_inventario");
+        var tabla_inventario_content =$ ("#tabla_inventario_content");
 
         //Cuando se cambia el valor del option seleccionado se
         //guarda la opcion seleccionada
@@ -146,9 +133,27 @@
                             type: 'GET',
                             url: 'inventarios/'+categoria_seleccionada+'/'+tipo_seleccionado,
                             success: function (response) {
-                                console.log(response);
-                                body_inventario.append(
-                                    '<tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>');
+                                //Borro el body de la tabla anterior
+                                tabla_inventario = $("#tabla_inventario");
+                                tabla_inventario.remove();
+
+                                //Guardo
+                                tabla_inventario_content.append(
+                                '<table class="table table-hover" id="tabla_inventario">'+
+                                    '<thead class="">'+
+                                        '<tr>'+
+                                            '<th with="10px">ID</th>'+
+                                            '<th>Nombre</th>'+
+                                            '<th>Num serie</th>'+
+                                            '<th>Modelo</th>'+
+                                            '<th>Descripcion</th>'+
+                                            '<th>Clave</th>'+
+                                            '<th colspan="3">&nbsp;</th>'+
+                                        '</tr>'+
+                                    '</thead>'+
+                                    '<tbody>'+
+                                    '</tbody>'+
+                                '</table>');
                             },
                             error: function (error) {
                                 console.log(error);
