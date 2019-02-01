@@ -20,6 +20,7 @@ class CreateLibrosTable extends Migration
             $table->integer('numero');
             $table->unsignedInteger('materia_id')->nullable();
             $table->foreign('materia_id')->references('id')->on('materias');
+            $table->string('url_image')->nullable();
             $table->timestamps();
         });
     }

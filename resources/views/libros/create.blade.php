@@ -73,6 +73,13 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="custom-file" id="customFile" lang="es">
+                                <input type="file" name="url_image" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp">
+                                <label class="custom-file-label" for="exampleInputFile">
+                                    Select file...
+                                </label>
+                            </div>
+                            <br>
                             <br>
                             <div class="form-group">
                                 <button class="btn btn-primary py-1 px-3"> Guardar </button>
@@ -182,10 +189,13 @@
                 },
                 materia:{
                     id: $("#select_materia").children("option:selected").val()
-                }
+                },
+                file:$('input[name="url_image"]').val()
+
+
             };
 
-            console.log("Data enviada: "+data.toString());
+            console.log(data);
 
             $.ajax({
                 type: $(this).attr("method"),
