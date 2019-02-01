@@ -96,7 +96,8 @@
         var select_tipo = $("#select_tipo");
 
         var options_tipo = $(".tipo_option");
-        var tabla_inventario_content =$ ("#tabla_inventario_content");
+        var tabla_inventario_content = $("#tabla_inventario_content");
+        var tabla_inventario = $("#tabla_inventario");
 
         //Cuando se cambia el valor del option seleccionado se
         //guarda la opcion seleccionada
@@ -133,6 +134,7 @@
                             type: 'GET',
                             url: 'inventarios/'+categoria_seleccionada+'/'+tipo_seleccionado,
                             success: function (response) {
+
                                 //Borro el body de la tabla anterior
                                 tabla_inventario = $("#tabla_inventario");
                                 tabla_inventario.remove();
@@ -151,9 +153,12 @@
                                             '<th colspan="3">&nbsp;</th>'+
                                         '</tr>'+
                                     '</thead>'+
-                                    '<tbody>'+
+                                    '<tbody id="body_inventario">'+
                                     '</tbody>'+
                                 '</table>');
+
+                                llenar_body(response);
+
                             },
                             error: function (error) {
                                 console.log(error);
@@ -167,6 +172,22 @@
                 }
             });
         });
+
+        function llenar_body(datos) {
+            //Agrego los dispositivos
+            datos.forEach(function(value, index){
+                $("#body_inventario").append(
+                    '<tr><td>'
+                    + value.id + '</td><td>'
+                    + value.nombre + '</td><td>'
+                    + value.num_serie + '</td><td>'
+                    + value.modelo +'</td><td>'
+                    + value.descripcion + '</td><td>'
+                    + value.clave+ '</td><td>'
+                    + '<button class="btn btn-sm btn-primary">Seleccionar</button>' + '</td></tr>'
+                );
+            });
+        }
     });
 </script>
 @endsection
