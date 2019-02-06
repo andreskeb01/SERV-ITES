@@ -11,7 +11,7 @@ namespace App\Http\Controllers\DashboardCentroComputo;
 use App\Categoria;
 use App\Http\Controllers\Controller;
 use App\Inventario;
-use Illuminate\Http\Request;
+use App\User;
 
 class DashboardController extends Controller
 {
@@ -21,19 +21,9 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request){
-
+    public function index(){
         $categorias = Categoria::all();
-        $inventario = collect([]);
-        //Usando query scopes obtenemos los dispositivos si se buscan por nombre
-        $nombre = $request->get('nombre');
-
-        //Si el nombre es diferente a una cadena vacia
-        if(trim($nombre) != ""){
-            $inventario = Inventario::nombre($nombre)->get();
-        }
-
-        return view ('dashboard_cc.dashboard', compact('inventario','categorias'));
+        return view ('dashboard_cc.dashboard', compact('categorias'));
     }
 
     //Obtiene tipos de categorias segun la categoria proporcionada
@@ -64,6 +54,37 @@ class DashboardController extends Controller
             return response()->json($dispositivos);
         }
 
+    }
+
+    public function dispositivosByNombre($nombre){
+
+        $dispositivos = collect([]);
+
+        //Busca los equipos con el nombre proporcionado
+
+        //Si el nombre es diferente a una cadena vacia
+        //Se consulta a traves del scopeNombre
+        if(trim($nombre) != "") {
+            $dispositivos = Inventario::nombre($nombre)->get();
+        }
+        return response()->json($dispositivos);
+    }
+
+    public function docentesByNombre($nombre){
+
+        $docentes = collect([]);
+
+        //Busca los usuarios con el nombre proporcionado
+        //y los filtra con los usuarios que tengan el rol_id = 5 (Rol Docente)
+
+        //Si el nombre es diferente a una cadena vacia
+        if(trim($nombre) != "") {
+            $docentes = User::where('name', 'like', "%$nombre%")
+                ->join('role_user', 'users.id', '=', 'role_user.user_id')
+                ->where('role_id', '=', 5)
+                ->get();
+        }
+        return response()->json($docentes);
     }
 
 }

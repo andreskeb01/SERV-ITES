@@ -159,12 +159,26 @@ class TablaPermisosSeeder extends Seeder
             'description'       => 'Puede acceder solo a información básica de inventario'
         ]);
 
-
-
-
         //***********************************************************************************************************
         //Rol  de permiso a docente
         $rol_docente->assignPermission($permiso_cc_index);
+        $rol_docente->assignPermission($permiso_cc_show);
+
+        //Usuario docente
+        $usuario_docente_01 = factory(User::class)->create([
+            'name' => 'Miguel González',
+            'email' => 'mgonzales@gmail.com',
+            'password' => bcrypt('docente')
+        ]);
+        //Usuario docente
+        $usuario_docente_02 = factory(User::class)->create([
+            'name' => 'Ana Martínez',
+            'email' => 'amartinez@gmail.com',
+            'password' => bcrypt('docente')
+        ]);
+
+        $usuario_docente_01->roles()->attach($rol_docente);
+        $usuario_docente_02->roles()->attach($rol_docente);
 
         //***********************************************************************************************************
 

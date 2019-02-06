@@ -11,7 +11,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="">Acerca de</a>
             </li>
-            <!-boton administrar para acceder al inventario-->
+            <!--boton administrar para acceder al inventario-->
             @can('inventario.index')
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('inventario.index')}}">Administrar</a>
@@ -60,10 +60,10 @@
                     </select>
                 </div>
                 <div class="form-group col-lg-3">
-                    <label class="form-text" for="input_busqueda">Buscar por nombre</label>
-                    <form class="form-inline" method="GET" action="{{ route('centrocomputo') }}">
-                        <div id="input_busqueda" class="form-group">
-                            <input  class="form-control px-2 mr-sm-2" name="nombre" type="search" placeholder="Ej. HP, Mac, etc" aria-label="Search">
+                    <label class="form-text" for="input_busqueda_equipos">Buscar por nombre</label>
+                    <form id="form_buscar_equipos" class="form-inline" method="GET" action="{{ route('centrocomputo') }}">
+                        <div id="input_busqueda_equipos" class="form-group">
+                            <input  class="form-control px-2 mr-sm-2" name="nombre_equipo" type="search" placeholder="Ej. HP, Mac, etc" aria-label="Search">
                             <button class="btn btn-outline-primary " type="submit">Buscar</button>
                         </div>
                     </form>
@@ -71,34 +71,7 @@
             </div>
             <div class="row" style="padding-right: 30px">
                 <div id="tabla_inventario_content">
-                    @if($inventario->isNotEmpty())
-                        <table class="table table-hover" id="tabla_inventario">
-                            <thead class="">
-                            <tr>
-                                <th with="10px">ID</th>
-                                <th>Nombre</th>
-                                <th>Num serie</th>
-                                <th>Modelo</th>
-                                <th>Descripcion</th>
-                                <th>Clave</th>
-                                <th colspan="3">&nbsp;</th>
-                            </tr>
-                            </thead>
-                            <tbody id="body_inventario">
-                            @foreach($inventario as $dispositivo)
-                                <tr>
-                                    <td>{{$dispositivo->id}}</td>
-                                    <td>{{$dispositivo->nombre}}</td>
-                                    <td>{{$dispositivo->num_serie}}</td>
-                                    <td>{{$dispositivo->modelo}}</td>
-                                    <td>{{$dispositivo->descripcion}}</td>
-                                    <td>{{$dispositivo->clave}}</td>
-                                    <td><button class="btn btn-sm btn-primary">Seleccionar</button></td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    @endif()
+
                 </div>
             </div>
         </div>
@@ -106,29 +79,19 @@
             <h5 class="card-title">Docentes</h5>
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-text" for="input_busqueda">Buscar por nombre</label>
-                    <form class="form-inline" method="GET" action="{{ route('centrocomputo') }}">
-                        <div id="input_busqueda" class="form-group">
-                            <input  class="form-control px-2 mr-sm-2" name="nombre" type="search" placeholder="Ej. Luis Moreno" aria-label="Search">
+                    <label class="form-text" for="input_busqueda_docentes">Buscar por nombre</label>
+                    <form id="form_buscar_docente" class="form-inline" method="GET" action="{{ route('centrocomputo') }}">
+                        <div id="input_busqueda_docentes" class="form-busquedagroup">
+                            <input  class="form-control px-2 mr-sm-2" name="input_nombre_docente" type="search" placeholder="Ej. Luis Moreno" aria-label="Search">
                             <button class="btn btn-outline-primary " type="submit">Buscar</button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="row">
-                <table class="table table-hover" id="tabla_users">
-                    <thead class="">
-                    <tr>
-                        <th with="10px">ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th colspan="3">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody id="body_users">
+                <div id="tabla_docentes_content">
 
-                    </tbody>
-                </table>
+                </div>
             </div>
         </div>
     </div>
@@ -143,6 +106,7 @@
                         <th with="10px">ID</th>
                         <th>Equipo</th>
                         <th>Total</th>
+                        <th>Hora entrada</th>
                         <th colspan="3">&nbsp;</th>
                     </tr>
                     </thead>
@@ -245,7 +209,6 @@
                 type: 'GET',
                 url: 'inventarios/' + categoria_seleccionada + '/' + tipo_seleccionado,
                 success: function (response) {
-                    console.log(response);
                     crear_tabla_inventario();
                     llenar_body(response);
                 },
@@ -254,18 +217,106 @@
                 }
             });
         });
+
+        $("#form_buscar_docente").submit(function (event) {
+            event.preventDefault();
+
+            var nombre_docente = $('input[name="input_nombre_docente"]').val();
+            //Si el nombre es diferente a una cadena vacia, enviamos un caracter
+            //para completar la url y exista al menos un nombre
+            if(!nombre_docente.trim()){
+               nombre_docente = "+";
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: 'docentes/'+nombre_docente,
+                success: function (response) {
+                    crear_tabla_docentes();
+                    llenar_body_table_docentes(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $("#form_buscar_equipos").submit(function (event) {
+            event.preventDefault();
+
+            var nombre_equipo = $('input[name="nombre_equipo"]').val();
+            //Si el nombre es diferente a una cadena vacia, enviamos un caracter
+            //para completar la url y exista al menos un nombre
+            if(!nombre_equipo.trim()){
+                nombre_equipo = "+";
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: 'dispositivos/'+nombre_equipo,
+                success: function (response) {
+                    crear_tabla_inventario();
+                    llenar_body(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
     });
+
+    function crear_tabla_docentes() {
+
+        var tabla_docentes_content = $("#tabla_docentes_content");
+        var tabla_docentes = $("#tabla_docentes");
+
+        //Borro el body de la tabla anterior
+        tabla_docentes.remove();
+
+        //Crea la tabla inventario
+        tabla_docentes_content.append(
+        '<div class="row" style="padding-right: 30px">'+
+            '<table class="table table-hover" id="tabla_docentes">'+
+            '<thead class="">'+
+                '<tr>'+
+                    '<th with="10px">ID</th>'+
+                    '<th>Nombre</th>'+
+                    '<th>Email</th>'+
+                    '<th colspan="3">&nbsp;</th>'+
+                '</tr>'+
+            '</thead>'+
+            '<tbody id="body_table_docentes">'+
+            '</tbody>'+
+            '</table>'+
+        '</div>'
+        );
+    }
+
+    function llenar_body_table_docentes(datos) {
+        //Agrego los docentes
+        datos.forEach(function(value, index){
+            $("#body_table_docentes").append(
+                '<tr><td>'
+                + value.id + '</td><td>'
+                + value.name + '</td><td>'
+                + value.email + '</td><td>'
+                + '<button class="btn btn-sm btn-primary">Seleccionar</button>' + '</td></tr>'
+            );
+        });
+    }
 
     function crear_tabla_inventario() {
 
         var tabla_inventario_content = $("#tabla_inventario_content");
         var tabla_inventario = $("#tabla_inventario");
 
-        //Borro el body de la tabla anterior
+        //Borro la tabla de inventario anterior
         tabla_inventario.remove();
 
         //Crea la tabla inventario
         tabla_inventario_content.append(
+        '<div class="row" style="padding-right: 30px">'+
             '<table class="table table-hover" id="tabla_inventario">'+
                 '<thead class="">'+
                     '<tr>'+
@@ -280,7 +331,9 @@
                 '</thead>'+
                 '<tbody id="body_inventario">'+
                 '</tbody>'+
-            '</table>');
+            '</table>'+
+        '</div>');
+
     }
 
         //Llena el body de la tabla inventario, con los dispostivos recibidos

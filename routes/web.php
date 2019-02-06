@@ -82,6 +82,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('categorias/{categoriaId}', 'DashboardController@tipoByCategoria')->name('tipoByCategoria.get');
         //Obtiene dispositivos segun la categoria y tipo proporcionados
         Route::get('inventarios/{categoriaId}/{tipoId}', 'DashboardController@byCategoriaTipo')->name('byCategoriaTipo.get');
+        //Obtiene dispositivos segun el nombre proporcionados
+        Route::get('dispositivos/{nombre}', 'DashboardController@dispositivosByNombre')->name('dispositivosByNombre.get');
+        //Obtiene usuarios con rol docente segun el nombre proporcionado
+        Route::get('docentes/{nombre}', 'DashboardController@docentesByNombre')->name('docentesByNombre.get');
     });
 
     //***************************************************************************************************************************************************************
