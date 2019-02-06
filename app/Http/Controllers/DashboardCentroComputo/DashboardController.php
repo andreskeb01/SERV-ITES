@@ -11,7 +11,7 @@ namespace App\Http\Controllers\DashboardCentroComputo;
 use App\Categoria;
 use App\Http\Controllers\Controller;
 use App\Inventario;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -21,12 +21,22 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index(Request $request){
+
         $categorias = Categoria::all();
-        $inventario = Inventario::all();
+        $inventario = collect([]);
+        //Usando query scopes obtenemos los dispositivos si se buscan por nombre
+        $nombre = $request->get('nombre');
+
+        //Si el nombre es diferente a una cadena vacia
+        if(trim($nombre) != ""){
+            $inventario = Inventario::nombre($nombre)->get();
+        }
+
         return view ('dashboard_cc.dashboard', compact('inventario','categorias'));
     }
 
+    //Obtiene tipos de categorias segun la categoria proporcionada
     public function tipoByCategoria($categoriaId)
     {
         $categoria = Categoria::find($categoriaId);
@@ -36,21 +46,24 @@ class DashboardController extends Controller
         return response()->json($tipos);
     }
 
+    //Obtiene dispositivos segun la categoria y tipo proporcionados
     public function byCategoriaTipo($categoriaId, $tipoId)
     {
         $categoria = Categoria::find($categoriaId);
         $dispositivos = null;
 
+        //Si no hay tipo filtramos por categoria
         if($tipoId == "null")
         {
             $dispositivos = $categoria->inventarios()->get();
             return response()->json($dispositivos);
         }else
         {
-            return response()->json(["value" => $tipoId]);
+            //Si hay tipo filtramos por categoria y tipo
+            $dispositivos = $categoria->inventariosByTipo($tipoId)->get();
+            return response()->json($dispositivos);
         }
 
     }
-
 
 }

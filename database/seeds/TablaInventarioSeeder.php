@@ -109,7 +109,7 @@ class TablaInventarioSeeder extends Seeder
             'num_serie' => '6752CFGH',
             'modelo' => 'BENQ-90X',
             'descripcion' => 'Color gris',
-            'clave' => 'cvga-cc-01',
+            'clave' => 'proyector-salon-01',
         ]);
 
         $hdmi01 = factory(Inventario::class)->create([
@@ -134,6 +134,14 @@ class TablaInventarioSeeder extends Seeder
             'modelo' => 'STEREN-087',
             'descripcion' => 'cable utp color blanco',
             'clave' => 'cutp-cc-01',
+        ]);
+
+        $accesspoint01 = factory(Inventario::class)->create([
+            'nombre' => 'access point',
+            'num_serie' => 'DKJ237',
+            'modelo' => 'STEREN-AP-972',
+            'descripcion' => 'Access point de 100mps',
+            'clave' => 'ap-cc-01',
         ]);
 
         //---------Categorias de dispositivos----------------------------------------
@@ -180,81 +188,85 @@ class TablaInventarioSeeder extends Seeder
         $categoria_cable->save();
 
         $categoria_red = new Categoria([
-            'nombre' => 'red',
+            'nombre' => 'Red',
             'descripcion' => 'Componentes que se utilizan en la red del instituto',
         ]);
         $categoria_red->save();
 
         //------Tipos para las categorias de los dispositivos----------------------
-        $alambrico = new Tipo([
+        $tipo_alambrico = new Tipo([
             'tipo' => 'alambrico'
         ]);
+        $tipo_alambrico->save();
 
-        $alambrico->save();
-
-        $inalambrico = new Tipo([
+        $tipo_inalambrico = new Tipo([
             'tipo' => 'inalambrico'
         ]);
+        $tipo_inalambrico->save();
 
-        $inalambrico->save();
-
-        $proyector = new Tipo([
+        $tipo_proyector = new Tipo([
             'tipo' => 'proyector'
         ]);
+        $tipo_proyector->save();
 
-        $proyector->save();
-
-        $tv = new Tipo([
+        $tipo_tv = new Tipo([
             'tipo' => 'tv'
         ]);
-        $tv->save();
+        $tipo_tv->save();
 
-        $vga = new Tipo([
+        $tipo_vga = new Tipo([
             'tipo' => 'vga'
         ]);
-        $vga->save();
+        $tipo_vga->save();
 
-        $hdmi = new Tipo([
+        $tipo_hdmi = new Tipo([
             'tipo' => 'hdmi'
         ]);
-        $hdmi->save();
+        $tipo_hdmi->save();
 
-        $utp = new Tipo([
+        $tipo_utp = new Tipo([
             'tipo' => 'UTP'
         ]);
-        $utp->save();
+        $tipo_utp->save();
+
+        $tipo_accesspoint = new Tipo([
+            'tipo' => 'Access Point'
+        ]);
+        $tipo_accesspoint->save();
 
         //----Agrega a cada categoria su respectivo tipo
-        $categoria_mouse->tipos()->attach($alambrico->id);
-        $categoria_mouse->tipos()->attach($inalambrico->id);
+        $categoria_mouse->tipos()->attach($tipo_alambrico->id);
+        $categoria_mouse->tipos()->attach($tipo_inalambrico->id);
 
-        $categoria_teclado->tipos()->attach($alambrico->id);
-        $categoria_teclado->tipos()->attach($inalambrico->id);
+        $categoria_teclado->tipos()->attach($tipo_alambrico->id);
+        $categoria_teclado->tipos()->attach($tipo_inalambrico->id);
 
-        $categoria_control->tipos()->attach($proyector->id);
-        $categoria_control->tipos()->attach($tv->id);
+        $categoria_control->tipos()->attach($tipo_proyector->id);
+        $categoria_control->tipos()->attach($tipo_tv->id);
 
-        $categoria_cable->tipos()->attach($vga->id);
-        $categoria_cable->tipos()->attach($hdmi->id);
+        $categoria_cable->tipos()->attach($tipo_vga->id);
+        $categoria_cable->tipos()->attach($tipo_hdmi->id);
 
-        $categoria_red->tipos()->attach($utp->id);
+        $categoria_red->tipos()->attach($tipo_accesspoint->id);
+        $categoria_red->tipos()->attach($tipo_utp->id);
 
-        //----Agrega cada dispositivo a su respectiva categoria--------------------
+        //----Agrega cada dispositivo a su respectiva categoria y tipo--------------------
         $categoria_pc->inventarios()->attach($pc01->id, ['tipo_id' => null]);
         $categoria_pc->inventarios()->attach($pc02->id, ['tipo_id' => null]);
         $categoria_pc->inventarios()->attach($pc03->id, ['tipo_id' => null]);
-//        $lap01->categoria()->save($categoria_laptop);
-//        $lap02->categoria()->save($categoria_laptop);
-//        $lap03->categoria()->save($categoria_laptop);
-//        $mouse01->categoria()->save($categoria_mouse);
-//        $mouse02->categoria()->save($categoria_mouse);
-//        $teclado01->categoria()->save($categoria_teclado);
-//        $teclado02->categoria()->save($categoria_teclado);
-//        $proyector01->categoria()->save($categoria_proyector);
-//        $proyector02->categoria()->save($categoria_proyector);
-//        $vga01->categoria()->save($categoria_cable);
-//        $hdmi01->categoria()->save($categoria_cable);
-//        $utp01->categoria()->save($categoria_cable);
+        $categoria_mouse->inventarios()->attach($mouse01->id, ['tipo_id' => $tipo_alambrico->id]);
+        $categoria_mouse->inventarios()->attach($mouse02->id, ['tipo_id' => $tipo_inalambrico->id]);
+        $categoria_laptop->inventarios()->attach($lap01, ['tipo_id' => null]);
+        $categoria_laptop->inventarios()->attach($lap02, ['tipo_id' => null]);
+        $categoria_laptop->inventarios()->attach($lap03, ['tipo_id' => null]);
+        $categoria_teclado->inventarios()->attach($teclado01->id, ['tipo_id' => $tipo_alambrico->id]);
+        $categoria_teclado->inventarios()->attach($teclado02->id, ['tipo_id' => $tipo_inalambrico->id]);
+        $categoria_proyector->inventarios()->attach($proyector01->id, ['tipo_id' => null]);
+        $categoria_proyector->inventarios()->attach($proyector02->id, ['tipo_id' => null]);
+        $categoria_cable->inventarios()->attach($hdmi01->id, ['tipo_id' => $tipo_hdmi->id]);
+        $categoria_cable->inventarios()->attach($vga01->id, ['tipo_id' => $tipo_vga->id]);
+        $categoria_red->inventarios()->attach($utp01->id, ['tipo_id' => $tipo_utp->id]);
+        $categoria_red->inventarios()->attach($accesspoint01->id, ['tipo_id' => $tipo_accesspoint->id]);
 
     }
 }
