@@ -16,10 +16,12 @@ class CreateInventarioTable extends Migration
         Schema::create('inventario', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->string('num_serie');
+            $table->string('num_serie')->unique();
             $table->string('modelo');
             $table->string('descripcion');
             $table->string('clave');
+            $table->unsignedInteger('prestamo_id')->nullable();
+            $table->foreign('prestamo_id')->references('id')->on('prestamos')->onDelete('cascade');
             $table->timestamps();
         });
     }

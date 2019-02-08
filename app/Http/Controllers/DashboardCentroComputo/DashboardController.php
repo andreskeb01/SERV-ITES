@@ -45,12 +45,14 @@ class DashboardController extends Controller
         //Si no hay tipo filtramos por categoria
         if($tipoId == "null")
         {
-            $dispositivos = $categoria->inventarios()->get();
+            //Obtiene dispositivos que no esten prestados
+            $dispositivos = $categoria->inventarios()->where('prestamo_id', '=', null)->get();
             return response()->json($dispositivos);
         }else
         {
             //Si hay tipo filtramos por categoria y tipo
-            $dispositivos = $categoria->inventariosByTipo($tipoId)->get();
+            //Obtiene dispositivos que no esten prestados
+            $dispositivos = $categoria->inventariosByTipo($tipoId)->where('prestamo_id', '=', null)->get();
             return response()->json($dispositivos);
         }
 
@@ -65,7 +67,7 @@ class DashboardController extends Controller
         //Si el nombre es diferente a una cadena vacia
         //Se consulta a traves del scopeNombre
         if(trim($nombre) != "") {
-            $dispositivos = Inventario::nombre($nombre)->get();
+            $dispositivos = Inventario::nombre($nombre)->where('prestamo_id', '=', null)->get();
         }
         return response()->json($dispositivos);
     }

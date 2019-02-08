@@ -99,7 +99,7 @@
         <div class="form-group col-7">
             <h5 class="card-title text-success">Registrar préstamo</h5>
             <label><strong>Docente: </strong><em id="label_responsable"></em></label>
-            <div class="input-group input-group-sm mb-1 pr-4">
+            <div class="input-group input-group mb-1 pr-4">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Hora entrada</span>
                 </div>
@@ -121,6 +121,11 @@
                     </tbody>
                 </table>
             </div>
+            <div class="row">
+                <div class="col offset-9">
+                    <button id="btn_prestar" class="btn btn-success" disabled>Registrar</button>
+                </div>
+            </div>
         </div>
     </div>
     @endcan
@@ -136,6 +141,9 @@
 @section('script')
 <script>
     $(document).ready(function () {
+
+        var prestamo = {};
+        prestamo["dispositivos"] = [];
 
         //Obtiene el select de categorias
         var select_categoria = $("#select_categoria");
@@ -189,7 +197,7 @@
                             url: 'inventarios/'+categoria_seleccionada+'/'+tipo_seleccionado,
                             success: function (response) {
                                 crear_tabla_inventario();
-                                llenar_body_tabla_inventario(response);
+                                llenar_body_tabla_inventario(response, prestamo);
                             },
                             error: function (error) {
                                 console.log(error);
@@ -217,30 +225,7 @@
                 url: 'inventarios/' + categoria_seleccionada + '/' + tipo_seleccionado,
                 success: function (response) {
                     crear_tabla_inventario();
-                    llenar_body_tabla_inventario(response);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        });
-
-        $("#form_buscar_docente").submit(function (event) {
-            event.preventDefault();
-
-            var nombre_docente = $('input[name="input_nombre_docente"]').val();
-            //Si el nombre es diferente a una cadena vacia, enviamos un caracter
-            //para completar la url y exista al menos un nombre
-            if(!nombre_docente.trim()){
-               nombre_docente = "+";
-            }
-
-            $.ajax({
-                type: 'GET',
-                url: 'docentes/'+nombre_docente,
-                success: function (response) {
-                    crear_tabla_docentes();
-                    llenar_body_tabla_docentes(response);
+                    llenar_body_tabla_inventario(response, prestamo);
                 },
                 error: function (error) {
                     console.log(error);
@@ -263,7 +248,7 @@
                 url: 'dispositivos/'+nombre_equipo,
                 success: function (response) {
                     crear_tabla_inventario();
-                    llenar_body_tabla_inventario(response);
+                    llenar_body_tabla_inventario(response, prestamo);
                 },
                 error: function (error) {
                     console.log(error);
@@ -271,6 +256,52 @@
             });
         });
 
+        $("#form_buscar_docente").submit(function (event) {
+            event.preventDefault();
+
+            var nombre_docente = $('input[name="input_nombre_docente"]').val();
+            //Si el nombre es diferente a una cadena vacia, enviamos un caracter
+            //para completar la url y exista al menos un nombre
+            if(!nombre_docente.trim()){
+               nombre_docente = "+";
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: 'docentes/'+nombre_docente,
+                success: function (response) {
+                    crear_tabla_docentes();
+                    llenar_body_tabla_docentes(response, prestamo);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $("#btn_prestar").click(function () {
+
+            prestamo["total"] = $("#body_registro_prestamo tr").length;
+
+            console.log(prestamo);
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: 'prestamos/store',
+                data: prestamo,
+                beforeSend: function () {
+
+                },
+                success: function (response) {
+                    console.log(response);
+                    window.location.href = "/prestamos";
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
 
     });
 
@@ -302,7 +333,7 @@
         );
     }
 
-    function llenar_body_tabla_docentes(datos) {
+    function llenar_body_tabla_docentes(datos, prestamo) {
         //Agrego los docentes
 
         var body_docentes = $("#body_tabla_docentes");
@@ -327,6 +358,9 @@
             });
 
             $("#label_responsable").text(usuario_seleccionado.name);
+
+            prestamo["user"] = {id:usuario_seleccionado.id};
+
         });
 
     }
@@ -362,7 +396,7 @@
     }
 
         //Llena el body de la tabla inventario, con los dispostivos recibidos
-    function llenar_body_tabla_inventario(datos) {
+    function llenar_body_tabla_inventario(datos, prestamo) {
         //Agrego los dispositivos
 
         var body_inventario = $("#body_inventario");
@@ -394,9 +428,21 @@
             $("#body_registro_prestamo").append(
                 '<tr><td value="id">'
                 + dispositivo_seleccionado.id +'</td><td value="descripcion">'
-                + dispositivo_seleccionado.modelo + '</td></tr>'
+                + dispositivo_seleccionado.modelo + '</td><td> </td></tr>'
             );
-            console.log(dispositivo_seleccionado);
+
+            var conteo_dispositivos = $("#body_registro_prestamo tr").length;
+
+            //Si hay mas de un dispositivo a prestar
+            if(conteo_dispositivos > 0){
+                $("#btn_prestar").attr('disabled', false);
+                //Agregamos el dispositivo seleccionado
+                // a la lista del prestamo
+                var val_disposivo = { id:dispositivo_seleccionado.id };
+
+                prestamo["dispositivos"].push(val_disposivo);
+
+            }
         });
     }
 

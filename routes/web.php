@@ -25,6 +25,13 @@ Route::group(['namespace' => 'Auth', 'prefix' => '' ], function ()
     Route::post('/computologout', 'LoginComputoController@cerrarSesion')->name('computo_cerrar_sesion');
 });
 
+Route::group(['namespace' => 'Computo', 'prefix' => '' ], function ()
+{
+    Route::get('prestamos', 'PrestamoController@index')->name('prestamos.index');
+    Route::post('prestamos/store', 'PrestamoController@store')->name('prestamos.create');
+    Route::delete('prestamos/{prestamo}', 'PrestamoController@delete')->name('prestamos.delete');
+});
+
 Route::get ('/biblioteca', 'DashboardBiblioteca\DashboardController@index')->name('biblioteca');
 Route::get ('/centrocomputo', 'DashboardCentroComputo\DashboardController@index')->name('centrocomputo');
 

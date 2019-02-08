@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 use App\Inventario;
 use App\Categoria;
 use App\Tipo;
+use App\Prestamo;
+use App\User;
 
 class TablaInventarioSeeder extends Seeder
 {
@@ -82,7 +84,7 @@ class TablaInventarioSeeder extends Seeder
 
         $teclado01 = factory(Inventario::class)->create([
             'nombre' => 'spectra-teclado',
-            'num_serie' => '64287',
+            'num_serie' => '64289',
             'modelo' => 'pkb030',
             'descripcion' => 'teclado color negro',
             'clave' => 'teclado-cc-01',
@@ -90,7 +92,7 @@ class TablaInventarioSeeder extends Seeder
 
         $teclado02 = factory(Inventario::class)->create([
             'nombre' => 'spectra-teclado',
-            'num_serie' => '64288',
+            'num_serie' => '64290',
             'modelo' => 'pkb030',
             'descripcion' => 'teclado color negro',
             'clave' => 'teclado-cc-02',
