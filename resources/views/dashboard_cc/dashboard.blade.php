@@ -98,19 +98,25 @@
     <div class="row">
         <div class="form-group col-7">
             <h5 class="card-title text-success">Registrar préstamo</h5>
-            <label><strong>Docente: </strong><em>{{auth()->user()->name}}</em></label>
-            <div class="row">
-                <table class="table table-hover" id="tabla_prestamo">
+            <label><strong>Docente: </strong><em id="label_responsable"></em></label>
+            <div class="input-group input-group-sm mb-1 pr-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Hora entrada</span>
+                </div>
+                <input class="form-control px-2 mr-sm-2" name="input_hora_entrada" type="search" placeholder="Seleccionar hora" aria-label="Search">
+            </div>
+
+            <div class="row col-12">
+                <table class="table table-hover" id="tabla_registro_prestamo">
                     <thead class="">
                     <tr>
                         <th with="10px">ID</th>
                         <th>Equipo</th>
                         <th>Total</th>
-                        <th>Hora entrada</th>
                         <th colspan="3">&nbsp;</th>
                     </tr>
                     </thead>
-                    <tbody id="body_prestamo">
+                    <tbody id="body_registro_prestamo">
 
                     </tbody>
                 </table>
@@ -130,6 +136,7 @@
 @section('script')
 <script>
     $(document).ready(function () {
+
         //Obtiene el select de categorias
         var select_categoria = $("#select_categoria");
         var select_tipo = $("#select_tipo");
@@ -182,7 +189,7 @@
                             url: 'inventarios/'+categoria_seleccionada+'/'+tipo_seleccionado,
                             success: function (response) {
                                 crear_tabla_inventario();
-                                llenar_body(response);
+                                llenar_body_tabla_inventario(response);
                             },
                             error: function (error) {
                                 console.log(error);
@@ -210,7 +217,7 @@
                 url: 'inventarios/' + categoria_seleccionada + '/' + tipo_seleccionado,
                 success: function (response) {
                     crear_tabla_inventario();
-                    llenar_body(response);
+                    llenar_body_tabla_inventario(response);
                 },
                 error: function (error) {
                     console.log(error);
@@ -233,7 +240,7 @@
                 url: 'docentes/'+nombre_docente,
                 success: function (response) {
                     crear_tabla_docentes();
-                    llenar_body_table_docentes(response);
+                    llenar_body_tabla_docentes(response);
                 },
                 error: function (error) {
                     console.log(error);
@@ -256,7 +263,7 @@
                 url: 'dispositivos/'+nombre_equipo,
                 success: function (response) {
                     crear_tabla_inventario();
-                    llenar_body(response);
+                    llenar_body_tabla_inventario(response);
                 },
                 error: function (error) {
                     console.log(error);
@@ -264,7 +271,9 @@
             });
         });
 
+
     });
+
 
     function crear_tabla_docentes() {
 
@@ -286,24 +295,40 @@
                     '<th colspan="3">&nbsp;</th>'+
                 '</tr>'+
             '</thead>'+
-            '<tbody id="body_table_docentes">'+
+            '<tbody id="body_tabla_docentes">'+
             '</tbody>'+
             '</table>'+
         '</div>'
         );
     }
 
-    function llenar_body_table_docentes(datos) {
+    function llenar_body_tabla_docentes(datos) {
         //Agrego los docentes
+
+        var body_docentes = $("#body_tabla_docentes");
+
         datos.forEach(function(value, index){
-            $("#body_table_docentes").append(
-                '<tr><td>'
-                + value.id + '</td><td>'
-                + value.name + '</td><td>'
+            body_docentes.append(
+                '<tr><td value="id">'
+                + value.id + '</td><td value="name">'
+                + value.name + '</td><td value="email">'
                 + value.email + '</td><td>'
-                + '<button class="btn btn-sm btn-primary">Seleccionar</button>' + '</td></tr>'
+                + '<button type="button" class="btn btn-success btn-sm">Agregar</button>' + '</td></tr>'
             );
         });
+        //Agregamos el evento para encontrar la fila de dispositivos seleccionados
+        body_docentes.find(".btn-success").click(function () {
+            var usuario_seleccionado = [];
+
+            $(this).parents("tr").find("td").each(function (index, value) {
+                if(index < 3){
+                    usuario_seleccionado[$(this).attr("value")] = $(this).html();
+                }
+            });
+
+            $("#label_responsable").text(usuario_seleccionado.name);
+        });
+
     }
 
     function crear_tabla_inventario() {
@@ -337,19 +362,41 @@
     }
 
         //Llena el body de la tabla inventario, con los dispostivos recibidos
-    function llenar_body(datos) {
+    function llenar_body_tabla_inventario(datos) {
         //Agrego los dispositivos
+
+        var body_inventario = $("#body_inventario");
+
         datos.forEach(function(value, index){
-            $("#body_inventario").append(
-                '<tr><td>'
-                + value.id + '</td><td>'
-                + value.nombre + '</td><td>'
-                + value.num_serie + '</td><td>'
-                + value.modelo +'</td><td>'
-                + value.descripcion + '</td><td>'
+            body_inventario.append(
+                '<tr><td value="id">'
+                + value.id + '</td><td value="nombre">'
+                + value.nombre + '</td><td value="num_serie">'
+                + value.num_serie + '</td><td value="modelo">'
+                + value.modelo +'</td><td value="descripcion">'
+                + value.descripcion + '</td><td value="clave">'
                 + value.clave+ '</td><td>'
-                + '<button class="btn btn-sm btn-primary">Seleccionar</button>' + '</td></tr>'
+                + '<button type="button" class="btn btn-success btn-sm">Agregar</button>' + '</td></tr>'
             );
+        });
+
+        //Agregamos el evento para encontrar la fila de dispositivos seleccionados
+        body_inventario.find(".btn-success").click(function () {
+
+            var dispositivo_seleccionado = [];
+
+            $(this).parents("tr").find("td").each(function (index, value) {
+                if(index < 6){
+                    dispositivo_seleccionado[$(this).attr("value")] = $(this).html();
+                }else return false;
+            });
+
+            $("#body_registro_prestamo").append(
+                '<tr><td value="id">'
+                + dispositivo_seleccionado.id +'</td><td value="descripcion">'
+                + dispositivo_seleccionado.modelo + '</td></tr>'
+            );
+            console.log(dispositivo_seleccionado);
         });
     }
 
