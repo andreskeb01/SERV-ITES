@@ -78,10 +78,12 @@ class DashboardController extends Controller
 
         //Busca los usuarios con el nombre proporcionado
         //y los filtra con los usuarios que tengan el rol_id = 5 (Rol Docente)
+        //ademas de que ese usuario no tenga ningun prestamo (prestamo_id = null)
 
         //Si el nombre es diferente a una cadena vacia
         if(trim($nombre) != "") {
             $docentes = User::where('name', 'like', "%$nombre%")
+                ->where('prestamo_id', '=', null)
                 ->join('role_user', 'users.id', '=', 'role_user.user_id')
                 ->where('role_id', '=', 5)
                 ->get();

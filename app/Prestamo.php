@@ -19,13 +19,41 @@ class Prestamo extends Model
         return $this->hasMany(Inventario::class);
     }
 
-    public function delete(){
+    public function scopeRelaciones($query, $usuario, $dispositivos){
+        $query->with($usuario, $dispositivos);
+    }
 
-        //$this->dispositivos()->detach();
-        $this->usuario()->detach();
+    public function format(Prestamo $prestamo)
+    {
+        $prestamo->loadMissing('usuario');
+        $prestamo->loadMissing('dispositivos');
 
-        // Borra el prestamo
-        return parent::delete();
+        return [
+            'usuario' => $prestamo->usuario,
+            'dispositivos' => $prestamo->dispositivos
+        ];
+    }
+
+    protected static function boot()
+    {
+        static::deleting(function ($prestamo){
+
+            parent::boot();
+
+            if(! \App::runningInConsole()){
+
+                //Actualizamos los ids del prestamo a null
+               $prestamo->usuario->prestamo_id = null;
+               foreach($prestamo->dispositivos as $dispositivo){
+                    $dispositivo->prestamo_id = null;
+               }
+
+               $prestamo->push();
+
+                //$prestamo->dispositivos->detach();
+                //deleting elimina por completo, incluso el prestamo
+            }
+        });
     }
 
 }

@@ -13,7 +13,7 @@ class PrestamoController extends Controller
 {
     public function index(){
 
-        $prestamos = Prestamo::latest()->paginate(20);
+        $prestamos = Prestamo::relaciones('usuario', 'dispositivos')->paginate(20);
 
         return view('prestamos.index', compact('prestamos'));
     }
@@ -49,9 +49,12 @@ class PrestamoController extends Controller
 
     public function delete(Prestamo $prestamo){
 
-        $prestamo->delete($prestamo);
+        //Carga nuevamente las relaciones perdidas anteriormente
+        $prestamo->format($prestamo);
 
-        return redirect()->route('prestamos.index')
+        $prestamo->delete();
+
+        return back()
             ->with('info', 'Prestamo finalizado con éxito');
     }
 }

@@ -15,8 +15,9 @@ class Inventario extends Model
         return $this->belongsTo(Categoria::class,'inventario_categoria_tipo');
     }
 
-    public function prestamo(){
-        return $this->belongsTo(Prestamo::class, 'prestamo_id');
+    public function prestamo()
+    {
+        return $this->belongsTo(Prestamo::class);
     }
 
     public function scopeNombre($query, $nombre)

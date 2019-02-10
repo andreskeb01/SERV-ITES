@@ -33,8 +33,9 @@
                             <tr>
                                 <th with="10px">ID</th>
                                 <th>Estatus</th>
-                                <th>Total dispositivos</th>
+                                <th>Docente</th>
                                 <th>Hora entrada</th>
+                                <th>Total dispositivos</th>
                                 <th colspan="3">&nbsp;</th>
                             </tr>
                             </thead>
@@ -43,13 +44,14 @@
                                 <tr>
                                     <td>{{$prestamo->id}}</td>
                                     <td>{{$prestamo->status}}</td>
-                                    <td>{{$prestamo->total}}</td>
+                                    <td>{{$prestamo->usuario->name}}</td>
                                     <td>{{$prestamo->created_at}}</td>
+                                    <td>{{$prestamo->total}}</td>
                                     <td>
                                         <a href="{{route('libros.show', $prestamo->id)}}" class="btn btn-sm">Ver detalle</a>
                                     </td>
                                     <td>
-                                        {!! Form::open(['route' => ['prestamos.delete', $prestamo->id], 'method' => 'DELETE']) !!}
+                                        {!! Form::open(['route' => ['prestamos.delete', $prestamo], 'method' => 'DELETE']) !!}
                                         <button class="btn btn-sm btn-danger">Finalizar prestamo</button>
                                         {!! Form::close() !!}
                                     </td>
