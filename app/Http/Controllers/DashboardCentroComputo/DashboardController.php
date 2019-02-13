@@ -12,6 +12,7 @@ use App\Categoria;
 use App\Http\Controllers\Controller;
 use App\Inventario;
 use App\User;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -23,7 +24,9 @@ class DashboardController extends Controller
 
     public function index(){
         $categorias = Categoria::all();
-        return view ('dashboard_cc.dashboard', compact('categorias'));
+        $current_time = Carbon::now()->toDateTimeString();
+
+        return view ('dashboard_cc.dashboard', compact('categorias', 'current_time'));
     }
 
     //Obtiene tipos de categorias segun la categoria proporcionada

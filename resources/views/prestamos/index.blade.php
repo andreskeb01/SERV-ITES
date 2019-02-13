@@ -1,4 +1,4 @@
-@extends('layouts.master-layout')
+@extends('layouts.master-cc-layout')
 
 @section('funciones')
     <div class="collapse navbar-collapse" id="navbarResponsive">

@@ -98,12 +98,19 @@
     <div class="row">
         <div class="form-group col-7">
             <h5 class="card-title text-success">Registrar préstamo</h5>
-            <label><strong>Docente: </strong><em id="label_responsable"></em></label>
+            <div class="input-group input-group mb-1 pr-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Docente</span>
+                </div>
+                <input class="form-control px-2 mr-sm-2" name="input_responsable" required disabled placeholder="Selecciona un docente">
+            </div>
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Selecciona un docente</div>
             <div class="input-group input-group mb-1 pr-4">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Hora entrada</span>
                 </div>
-                <input class="form-control px-2 mr-sm-2" name="input_hora_entrada" type="search" placeholder="Seleccionar hora" aria-label="Search">
+                <input class="form-control px-2 mr-sm-2" name="input_hora_entrada" type="search" placeholder="" aria-label="Search">
             </div>
 
             <div class="row col-12">
@@ -279,7 +286,13 @@
             });
         });
 
-        $("#btn_prestar").click(function () {
+        $("#btn_prestar").click(function (event) {
+
+            var x = $('input[name="input_responsable"]');
+
+
+            //coloco el valor en el placeholder de hora entrada
+            //$("input[name='input_hora_entrada']").prop('placeholder', "{{$current_time}}");
 
             prestamo["total"] = $("#body_registro_prestamo tr").length;
 
@@ -291,7 +304,7 @@
                 url: 'prestamos/store',
                 data: prestamo,
                 beforeSend: function () {
-
+                    console.log(prestamo);
                 },
                 success: function (response) {
                     console.log(response);
@@ -357,7 +370,7 @@
                 }
             });
 
-            $("#label_responsable").text(usuario_seleccionado.name);
+            $("input[name='input_responsable']").val(usuario_seleccionado.name);
 
             prestamo["user"] = {id:usuario_seleccionado.id};
 
