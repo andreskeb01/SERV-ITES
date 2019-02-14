@@ -47,12 +47,12 @@ class PrestamoController extends Controller
         return response()->json("Prestamo creado correctamente id:".$prestamo->id);
     }
 
-    public function delete(Prestamo $prestamo){
+    public function update(Prestamo $prestamo){
 
         //Carga nuevamente las relaciones perdidas anteriormente
         $prestamo->format($prestamo);
 
-        $prestamo->delete();
+        $prestamo->save();
 
         return back()
             ->with('info', 'Prestamo finalizado con éxito');

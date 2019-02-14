@@ -34,8 +34,9 @@
                                 <th with="10px">ID</th>
                                 <th>Estatus</th>
                                 <th>Docente</th>
+                                <th>Dispositivos</th>
                                 <th>Hora entrada</th>
-                                <th>Total dispositivos</th>
+                                <th>Hora salida</th>
                                 <th colspan="3">&nbsp;</th>
                             </tr>
                             </thead>
@@ -45,13 +46,14 @@
                                     <td>{{$prestamo->id}}</td>
                                     <td>{{$prestamo->status}}</td>
                                     <td>{{$prestamo->usuario->name}}</td>
-                                    <td>{{$prestamo->created_at}}</td>
                                     <td>{{$prestamo->total}}</td>
+                                    <td>{{$prestamo->created_at}}</td>
+                                    <td><input id="dtPickerHoraSalida" class="form-control" type="datetime-local"></td>
                                     <td>
-                                        <a href="{{route('libros.show', $prestamo->id)}}" class="btn btn-sm">Ver detalle</a>
+                                        <a href="{{route('libros.show', $prestamo)}}" class="btn btn-sm">Ver detalle</a>
                                     </td>
                                     <td>
-                                        {!! Form::open(['route' => ['prestamos.delete', $prestamo], 'method' => 'DELETE']) !!}
+                                        {!! Form::open(['route' => ['prestamos.update', $prestamo], 'method' => 'PUT']) !!}
                                         <button class="btn btn-sm btn-danger">Finalizar prestamo</button>
                                         {!! Form::close() !!}
                                     </td>
@@ -73,4 +75,54 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $("#dtPickerHoraSalida").val(getFullDatetime());
+            //console.log(getFullDatetime());
+        });
+
+        function getFullDatetime() {
+            var currentdate = new Date();
+            var datetime =
+                + currentdate.getFullYear() + "-"
+                + getFormatedMonth(currentdate.getMonth()+1)  + "-"
+                + currentdate.getDate() + "T"
+                + (getFormatedHours(currentdate.getHours()-12)) + ":"
+                + getFormatedMinutes(currentdate.getMinutes());
+
+            return datetime;
+        }
+
+        function getFormatedMonth(unformatedMonth) {
+            if(unformatedMonth < 10){
+                unformatedMonth = '0'+unformatedMonth;
+            }
+            return unformatedMonth;
+        }
+
+        function getFormatedHours(unformatedHours) {
+            if(unformatedHours < 10){
+                unformatedHours = '0'+unformatedHours;
+            }
+            return unformatedHours;
+        }
+
+        function getFormatedMinutes(unformatedMinutes) {
+            if(unformatedMinutes < 10){
+                unformatedMinutes = '0'+unformatedMinutes;
+            }
+            return unformatedMinutes;
+        }
+
+        function getFormatedSeconds(unformatedSeconds) {
+            if(unformatedSeconds < 10){
+                unformatedSeconds = '0'+unformatedSeconds;
+            }
+            return unformatedSeconds;
+        }
+
+
+    </script>
 @endsection

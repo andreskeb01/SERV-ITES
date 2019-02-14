@@ -36,7 +36,7 @@ class Prestamo extends Model
 
     protected static function boot()
     {
-        static::deleting(function ($prestamo){
+        static::updating(function ($prestamo){
 
             parent::boot();
 
@@ -48,7 +48,11 @@ class Prestamo extends Model
                     $dispositivo->prestamo_id = null;
                }
 
+               $prestamo->status = "finalizado";
+
                $prestamo->push();
+
+               //dd($prestamo);
 
                 //$prestamo->dispositivos->detach();
                 //deleting elimina por completo, incluso el prestamo
