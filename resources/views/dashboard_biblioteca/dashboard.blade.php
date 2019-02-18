@@ -13,7 +13,7 @@
             </li>
             @can('libros.index')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('libros.index')}}">Administrar</a>
+                    <a class="nav-link" href="{{route('biblioteca.administrar')}}">Administrar</a>
                 </li>
             @endcan
             <li class="nav-item">

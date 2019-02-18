@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Auth', 'prefix' => '' ], function ()
 });
 
 Route::get ('/biblioteca', 'DashboardBiblioteca\DashboardController@index')->name('biblioteca');
+Route::get ('/biblioteca/administrar', 'DashboardBiblioteca\DashboardController@administrar')->name('biblioteca.administrar');
 Route::get ('/centrocomputo', 'DashboardCentroComputo\DashboardController@index')->name('centrocomputo');
 
 //Rutas con el middleware Permisos
@@ -75,6 +76,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('materias/{licenciatura}', 'MateriaController@index')->name('materias.index');
     //Obtiene materias segun el cuatrimestre proporcionado
     Route::get('materia/{cuatrimestre}/{licenciaturaId}', 'MateriaController@materiasByCuatrimestre')->name('materiasByCuatrimestre.get');
+    Route::get('materia/create', 'MateriaController@create')->name('materias.create')->middleware('permission:materias.create');
+    Route::post('materia/store', 'MateriaController@store')->name('materias.store')->middleware('permission:materias.create');
+
 
 
     //***************************************************************************************************************************************************************
