@@ -32,4 +32,5 @@ class User extends Authenticatable
     public function prestamo(){
         return $this->belongsTo(Prestamo::class, 'prestamo_id');
     }
+
 }

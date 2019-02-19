@@ -50,7 +50,7 @@
                 <br>
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="btn-group">
-                        <a href="{{route('materias.index', $licenciatura)}}" class="btn btn-sm btn-outline-primary">Ver licenciatura</a>
+                        <a href="{{route('biblioteca.consulta', $licenciatura)}}" class="btn btn-sm btn-outline-primary">Ver licenciatura</a>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Info</button>
                     </div>
                 </div>

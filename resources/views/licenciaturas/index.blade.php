@@ -25,7 +25,7 @@
             <div class="col-md8 col-md-offset-2">
                 <div class="card">
                     <div class="card-header">
-                        Libros disponibles
+                        Licenciaturas disponibles
                         @can('licenciaturas.create')
                             <a href="{{route('licenciaturas.create')}}" class="btn btn-sm btn-primary float-right">Crear</a>
                         @endcan

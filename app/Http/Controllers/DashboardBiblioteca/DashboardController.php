@@ -28,4 +28,8 @@ class DashboardController extends Controller
         return view ('dashboard_biblioteca.menu_administrar');
     }
 
+    public function consulta(Licenciatura $licenciatura){
+        return view( 'dashboard_biblioteca.consulta_libros', compact('licenciatura'));
+    }
+
 }

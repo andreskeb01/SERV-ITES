@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
@@ -21,13 +21,15 @@ class LoginController extends Controller
 
     public function autenticar()
     {
+
        $credentials = $this->validate(request(), [
            'email' => 'email|required|string',
            'password' =>'required|string'
        ]);
 
 
-       if( Auth::attempt($credentials)){
+       if(Auth::attempt($credentials)){
+
            $user = Auth::user();
            $id_rol_usuario = DB::table('role_user')->where([['user_id', '=', $user->id]])->first();
            //Roles id

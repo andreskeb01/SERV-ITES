@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -13,7 +14,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::latest()->paginate(10);
+
+        return view('biblioteca.users.index', compact('usuarios'));
     }
 
     /**
@@ -71,14 +74,11 @@ class UsuarioController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function delete(User $usuario)
     {
-        //
+        $usuario->delete();
+
+        return back()->with('info', 'Usuario eliminado correctamente');
     }
 }

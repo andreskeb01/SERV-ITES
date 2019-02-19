@@ -13,10 +13,11 @@ class MateriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Licenciatura $licenciatura)
+    public function index()
     {
+        $materias = Materia::paginate(10);
         //Muestro la vista con las materias disponibles
-        return view('materias.index', compact('licenciatura'));
+        return view('materias.index', compact('materias'));
     }
 
     /**

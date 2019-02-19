@@ -26,8 +26,8 @@
                 <div class="card">
                     <div class="card-header">
                         Materias disponibles
-                        @can('materias.create')
-                            <a href="{{route('materias.create')}}" class="btn btn-sm btn-primary float-right">Crear</a>
+                        @can('usuarios.create')
+                            <a href="{{route('usuarios.create')}}" class="btn btn-sm btn-primary float-right">Crear</a>
                         @endcan
                     </div>
                     <div class="card-body">
@@ -36,31 +36,35 @@
                             <tr>
                                 <th with="10px">ID</th>
                                 <th>Nombre</th>
-                                <th>Clave</th>
-                                <th>Cuatrimestre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
                                 <th colspan="3">&nbsp;</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($materias as $materia)
+                            @forelse($usuarios as $usuario)
                                 <tr>
-                                    <td>{{$materia->id}}</td>
-                                    <td>{{$materia->nombre}}</td>
-                                    <td>{{$materia->clave}}</td>
-                                    <td>{{$materia->cuatrimestre}}</td>
+                                    <td>{{$usuario->id}}</td>
+                                    <td>{{$usuario->nombre}}</td>
+                                    <td>{{$usuario->email}}</td>
                                     <td>
-                                        @can('materias.show')
-                                            <a href="{{route('materias.show', $materia->id)}}" class="btn btn-sm">Ver</a>
+                                        @foreach($usuario->getRoles() as $role)
+                                            {{$role}}
+                                            @endforeach
+                                    </td>
+                                    <td>
+                                        @can('usuarios.show')
+                                            <a href="{{route('materias.show', $usuario->id)}}" class="btn btn-sm">Ver</a>
                                         @endcan
                                     </td>
                                     <td>
-                                        @can('materias.edit')
-                                            <a href="{{route('materias.edit', $materia->id)}}" class="btn btn-sm">Editar</a>
+                                        @can('usuarios.edit')
+                                            <a href="{{route('materias.edit', $usuario->id)}}" class="btn btn-sm">Editar</a>
                                         @endcan
                                     </td>
                                     <td>
-                                        @can('materias.delete')
-                                            {!! Form::open(['route' => ['materias.delete', $materia->id], 'method' => 'DELETE']) !!}
+                                        @can('usuarios.delete')
+                                            {!! Form::open(['route' => ['usuarios.delete', $usuario->id], 'method' => 'DELETE']) !!}
                                             <button class="btn btn-sm btn-danger">Eliminar</button>
                                             {!! Form::close() !!}
                                         @endcan
@@ -68,7 +72,7 @@
                                 </tr>
                             @empty
                                 <tr class="alert alert-danger">
-                                    {{__("No tienes registrado ninguna materia")}}
+                                    {{__("No tienes registrado ningun usuario")}}
                                 </tr>
                             @endforelse
                             </tbody>
@@ -76,8 +80,8 @@
                     </div>
                 </div>
                 <br>
-                @if($materias->count())
-                    {{$materias->links()}}
+                @if($usuarios->count())
+                    {{$usuarios->links()}}
                 @endif
                 <br>
             </div>

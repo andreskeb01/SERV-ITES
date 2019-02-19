@@ -25,6 +25,11 @@ class TablaPermisosSeeder extends Seeder
             'slug'        => 'usuarios.show',
             'description' => 'Ver en detalle todos los usuarios del Sistema',
         ]);
+        $permiso_usuarios_create = Permission::create([
+            'name'        => 'Crear usuarios del Sistema',
+            'slug'        => 'usuarios.create',
+            'description' => 'Crear usuarios en el Sistema',
+        ]);
         $permiso_usuarios_edit =Permission::create([
             'name'        => 'Edicion de usuarios del Sistema',
             'slug'        => 'usuarios.edit',
@@ -244,6 +249,12 @@ class TablaPermisosSeeder extends Seeder
         $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_materia_create);
         $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_materia_edit);
         $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_materia_delete);
+
+        $rol_encargado_biblioteca->assignPermission($permiso_usuarios_index);
+        $rol_encargado_biblioteca->assignPermission($permiso_usuarios_show);
+        $rol_encargado_biblioteca->assignPermission($permiso_usuarios_create);
+        $rol_encargado_biblioteca->assignPermission($permiso_usuarios_edit);
+        $rol_encargado_biblioteca->assignPermission($permiso_usuarios_delete);
 
         //Permisos para el rol alumno
         $rol_alumno->assignPermission($permiso_licenciatura_index);

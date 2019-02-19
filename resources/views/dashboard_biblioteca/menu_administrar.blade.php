@@ -79,7 +79,7 @@
                 window.location.href = "/libros";
             });
             $("#materia").click(function(){
-                window.location.href = "/materia/create";
+                window.location.href = "/materias";
             });
 
             $("#usuario").click(function(){

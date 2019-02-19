@@ -37,6 +37,7 @@ Route::group(['namespace' => 'Computo', 'prefix' => '' ], function ()
 });
 
 Route::get ('/biblioteca', 'DashboardBiblioteca\DashboardController@index')->name('biblioteca');
+Route::get ('/biblioteca/consulta/{licenciatura}', 'DashboardBiblioteca\DashboardController@consulta')->name('biblioteca.consulta');
 Route::get ('/biblioteca/administrar', 'DashboardBiblioteca\DashboardController@administrar')->name('biblioteca.administrar');
 Route::get ('/centrocomputo', 'DashboardCentroComputo\DashboardController@index')->name('centrocomputo');
 
@@ -84,12 +85,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('licenciatura/{id}', 'LicenciaturaController@licenciaturaById')->name('licenciaturaById.get');
 
     //Permisos para materias
-    Route::get('materias/{licenciatura}', 'MateriaController@index')->name('materias.index');
+    Route::get('materias', 'MateriaController@index')->name('materias.index')->middleware('permission:materias.index');
     //Obtiene materias segun el cuatrimestre proporcionado
     Route::get('materia/{cuatrimestre}/{licenciaturaId}', 'MateriaController@materiasByCuatrimestre')->name('materiasByCuatrimestre.get');
     //Crea materias
     Route::get('materia/create', 'MateriaController@create')->name('materias.create')->middleware('permission:materias.create');
     Route::post('materia/store', 'MateriaController@store')->name('materias.store')->middleware('permission:materias.create');
+    Route::get('materias/{materia}', 'MateriaController@show')->name('materias.show')->middleware('permission:materias.show');
+    Route::get('materias/{materia}/edit', 'MateriaController@edit')->name('materias.edit')->middleware('permission:materias.edit');
+    Route::put('materias/{materia}', 'MateriaController@update')->name('materias.update')->middleware('permission:materias.edit');
+    Route::delete('materias/{materia}', 'MateriaController@delete')->name('materias.delete')->middleware('permission:materias.delete');
+
 
 
     Route::group(['namespace' => 'DashboardCentroComputo'], function ()
