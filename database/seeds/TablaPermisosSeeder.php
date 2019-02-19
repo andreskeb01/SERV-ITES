@@ -89,6 +89,32 @@ class TablaPermisosSeeder extends Seeder
             'slug'        => 'libros.delete',
             'description' => 'Eliminar cualquier libro',
         ]);
+//--------------------------------
+        $permiso_biblioteca_materia_index = Permission::create([
+            'name'        => 'Navegar materias',
+            'slug'        => 'materias.index',
+            'description' => 'Lista y navega todas las materias',
+        ]);
+        $permiso_biblioteca_materia_show = Permission::create([
+            'name'        => 'Ver detalle de materias',
+            'slug'        => 'materias.show',
+            'description' => 'Ver en detalle todas las materias',
+        ]);
+        $permiso_biblioteca_materia_create = Permission::create([
+            'name'        => 'Creacion de materias',
+            'slug'        => 'materias.create',
+            'description' => 'Crear una materia',
+        ]);
+        $permiso_biblioteca_materia_edit = Permission::create([
+            'name'        => 'Edicion de materias',
+            'slug'        => 'materias.edit',
+            'description' => 'Editar cualquier dato de una materia',
+        ]);
+        $permiso_biblioteca_materia_delete = Permission::create([
+            'name'        => 'Eliminar materias',
+            'slug'        => 'materias.delete',
+            'description' => 'Eliminar cualquier materia',
+        ]);
 
         //----Crea los roles del SERVITES---//
 
@@ -213,8 +239,15 @@ class TablaPermisosSeeder extends Seeder
         $rol_encargado_biblioteca->assignPermission($permiso_licenciatura_edit);
         $rol_encargado_biblioteca->assignPermission($permiso_licenciatura_delete);
 
+        $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_materia_index);
+        $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_materia_show);
+        $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_materia_create);
+        $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_materia_edit);
+        $rol_encargado_biblioteca->assignPermission($permiso_biblioteca_materia_delete);
+
         //Permisos para el rol alumno
         $rol_alumno->assignPermission($permiso_licenciatura_index);
+        $rol_alumno->assignPermission($permiso_biblioteca_show);
 
         //--Asignacion de roles a usuarios
 
@@ -234,7 +267,17 @@ class TablaPermisosSeeder extends Seeder
             'password' => bcrypt('biblioteca')
         ]);
 
+
+
+        //Rol de un usuario alumno
+        $usuario_alumno_biblioteca = factory(User::class)->create([
+            'name' => 'Alumno ITES',
+            'email' => 'alumnoRD@gmail.com',
+            'password' => bcrypt('biblioteca')
+        ]);
+
         $usuario_encargado_biblioteca->roles()->attach($rol_encargado_biblioteca);
+        $usuario_alumno_biblioteca->roles()->attach($rol_alumno);
 
         //Rol de superaministrador
         $usuario_superadmin = factory(User::class)->create([

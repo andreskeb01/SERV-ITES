@@ -7,7 +7,7 @@
                 <a class="nav-link" href="{{route('biblioteca')}}">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('libros.index')}}">Libros</a>
+                <a class="nav-link" href="{{route('biblioteca.administrar')}}">Administrar</a>
             </li>
             <li class="nav-item">
                 <form method="POST" action="{{ route('cerrar_sesion') }}">
@@ -22,43 +22,27 @@
 @endsection
 
 @section('content')
-
     <div class="container">
         <br>
         <div class="row justify-content-center">
-            <div class="col-md8 col-md-offset-2">
+            <div class="col-lg-6">
                 <div class="card">
-                    <div class="card-header">{{$libro->titulo}}</div>
+                    <div class="card-header">Ingresa los datos de la nueva materia</div>
                     <div class="card-body">
-                        <form id="form_libro_create" method="PUT" action="{{ route('libros.update') }}" enctype="multipart/form-data">
-                            <input class="form-control"
-                                   type="text"
-                                   value="{{$libro->id}}"
-                                   name="libro_id"
-                                   hidden>
+                        <form id="form_materia_create" method="POST" action="{{ route('materias.store') }}" >
                             <div class="form-group" >
-                                <label for="text">Titulo</label>
+                                <label for="text">Nombre</label>
                                 <input class="form-control"
                                        type="text"
-                                       name="titulo"
-                                       placeholder="Titulo del libro"
-                                       value="{{$libro->titulo}}">
+                                       name="nombre"
+                                       placeholder="Nombre de la materia">
                             </div>
                             <div class="form-group" >
-                                <label for="text">Autor</label>
+                                <label for="text">Clave</label>
                                 <input class="form-control"
                                        type="text"
-                                       name="autor"
-                                       placeholder="Autor del libro"
-                                       value="{{$libro->autor}}">
-                            </div>
-                            <div class="form-group" >
-                                <label for="text">Numero</label>
-                                <input class="form-control"
-                                       type="number"
-                                       name="numero"
-                                       placeholder="Número del libro"
-                                       value="{{$libro->numero}}">
+                                       name="clave"
+                                       placeholder="Clave de la materia">
                             </div>
                             <div class="form-group">
                                 <label for="select_licenciatura">Seleccione la licenciatura</label>
@@ -76,26 +60,16 @@
                                     <select class="form-control" id="select_cuatrimestre" disabled="true">
                                     </select>
                                 </div>
-                                <div class="form-group col">
-                                    <label class="form-text" for="select_materia">Seleccione la materia</label>
-                                    <select class="form-control" id="select_materia" disabled="true">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="custom-file" id="customFile" lang="es">
-                                <input type="file" name="url_image" class="custom-file-input" id="input_img_libro" aria-describedby="fileHelp">
-                                <label class="custom-file-label" for="exampleInputFile">
-                                    Seleciona la imagen para el libro
-                                </label>
                             </div>
                             <br>
                             <br>
                             <div class="form-group">
-                                <button class="btn btn-primary py-1 px-3"> Actualizar </button>
+                                <button class="btn btn-primary py-1 px-3"> Guardar </button>
                             </div>
                         </form>
                     </div>
                 </div>
+                <br>
             </div>
         </div>
     </div>
@@ -153,71 +127,36 @@
                 //$("#select_materia").prop('value', selected_licenciatura);
             });
 
-            //Accedo al cuatrimestre seleccionado
-            $("#select_cuatrimestre").change(function (event) {
-                event.preventDefault();
-                //Guardo el id del cuatrimestre seleccionado (propiedad value)
-                var selected_cuatrimestre = $(this).children("option:selected").val();
-                //Guardo el id de la licenciatura seleccionada
-                var selected_licenciatura = $('#select_licenciatura').children("option:selected").val();
 
-                //Cargo las materias por ajax (con el cuatrimestre y licenciatura_id proporcionados)
-                $.ajax({
-                    type: 'GET',
-                    url: '/materia/'+selected_cuatrimestre+'/'+selected_licenciatura,
-                    success: function (response) {
-
-                        //Borro los option de materia si hubiese
-                        if(options_materia != undefined){
-                            options_materia = $(".materia_option");
-                            options_materia.remove();
-                        }
-                        response.forEach(function (item, index) {
-                            select_materia.append(
-                                '<option class="form-control materia_option" value="'+item.id+'">'+item.nombre+'</option>'
-                            );
-                        });
-                        //console.log(response);
-                        select_materia.prop('disabled', false);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-            });
 
             //Captura el evento de clic en el boton guardar y envia
             //el objeto libro (JSON) por AJAX a la url de libros.store
-            $("#form_libro_create").submit(function (event) {
+            $("#form_materia_create").submit(function (event) {
 
-                var imagen =  $('#input_img_libro')[0].files[0];
-                var formData = new FormData();
+                event.preventDefault();
 
-                var libro_id = $('input[name="libro_id"]').val();
-                var titulo = $('input[name="titulo"]').val();
-                var autor = $('input[name="autor"]').val();
-                var numero = $('input[name="numero"]').val();
-                var id_materia = $("#select_materia").children("option:selected").val();
-
-                formData.append('libro_id', libro_id);
-                formData.append('titulo', titulo);
-                formData.append('autor', autor);
-                formData.append('numero', numero);
-                formData.append('id_materia', id_materia);
-                formData.append('img', imagen);
+                var nombre = $('input[name="nombre"]').val();
+                var clave = $('input[name="clave"]').val();
+                var id_licenciatura = $("#select_licenciatura").children("option:selected").val();
+                var cuatrimestre = $("#select_cuatrimestre").children("option:selected").val();
+                var materia = {
+                    "nombre" :nombre,
+                    "clave" : clave,
+                    "id_licenciatura": id_licenciatura,
+                    "cuatrimestre" : cuatrimestre,
+                };
 
                 $.ajax({
                     url: $(this).attr("action"),
                     type: $(this).attr("method"),
-                    data: formData,
-                    cache: false,
-                    processData: false,
-                    contentType : false,
+                    data: materia,
+                    dataType: 'json',
                     beforeSend: function () {
-
+                        console.log(materia);
                     },
                     success: function (response) {
-                       // window.location.href = "/libros";
+                        console.log(response);
+                        window.location.href = "/biblioteca/administrar";
                     },
                     error: function (err) {
                         console.log(err);

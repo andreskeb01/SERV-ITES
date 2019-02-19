@@ -24,5 +24,8 @@ class DashboardController extends Controller
         $licenciaturas = Licenciatura::paginate(10);
         return view ('dashboard_biblioteca.dashboard', compact('licenciaturas'));
     }
+    public function administrar(){
+        return view ('dashboard_biblioteca.menu_administrar');
+    }
 
 }

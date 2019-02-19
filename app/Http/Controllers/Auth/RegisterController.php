@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Caffeinated\Shinobi\Models\Role;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -37,7 +40,46 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
+    }
+
+    public function showRegistrationForm(){
+        return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        if($this->validator($request->all())->validate())
+        {
+            //Crea un usuario
+            $user = $this->create([
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => bcrypt($request->get('password')),
+            ]);
+
+            //Busca el rol y lo asocia al usuario
+            $rol = Role::find($request->get('rol_usuario'));
+
+            $user->roles()->attach($rol);
+
+            Auth::guard()->login($user);
+
+            return $this->redirectPath($rol->id);
+
+        }
+
+    }
+
+    protected function guard()
+    {
+        return Auth::guard();
+    }
+
+    public function redirectPath($rol_id){
+        if($rol_id == 3){
+           return redirect()->route('biblioteca');
+        }else return redirect()->route('centrocomputo');
     }
 
     /**
@@ -52,6 +94,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'rol_usuario' => 'required'
         ]);
     }
 
@@ -69,4 +112,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+
 }

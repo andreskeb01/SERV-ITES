@@ -23,6 +23,10 @@ Route::group(['namespace' => 'Auth', 'prefix' => '' ], function ()
     Route::get('/logincomputo', 'LoginComputoController@showLoginComputoForm')->name('login_computo_index');
     Route::post('/logincomputo', 'LoginComputoController@autenticar')->name('login_computo_autenticar');
     Route::post('/computologout', 'LoginComputoController@cerrarSesion')->name('computo_cerrar_sesion');
+
+    Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
+    Route::post('/register', 'RegisterController@register')->name('register.create');
+
 });
 
 Route::group(['namespace' => 'Computo', 'prefix' => '' ], function ()
@@ -33,6 +37,7 @@ Route::group(['namespace' => 'Computo', 'prefix' => '' ], function ()
 });
 
 Route::get ('/biblioteca', 'DashboardBiblioteca\DashboardController@index')->name('biblioteca');
+Route::get ('/biblioteca/administrar', 'DashboardBiblioteca\DashboardController@administrar')->name('biblioteca.administrar');
 Route::get ('/centrocomputo', 'DashboardCentroComputo\DashboardController@index')->name('centrocomputo');
 
 //Rutas con el middleware Permisos
@@ -64,8 +69,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('libros/store', 'LibroController@store')->name('libros.store')->middleware('permission:libros.create');
     Route::get('libros/{libro}', 'LibroController@show')->name('libros.show')->middleware('permission:libros.show');
     Route::get('libros/{libro}/edit', 'LibroController@edit')->name('libros.edit')->middleware('permission:libros.edit');
-    Route::put('libros/{libro}', 'LibroController@update')->name('libros.update')->middleware('permission:libros.edit');
-    Route::delete('libros/{libro}', 'LibroController@delete')->name('libros.delete')->middleware('permission:libros.delete');
+    Route::put('libros/update', 'LibroController@update')->name('libros.update')->middleware('permission:libros.edit');
+    Route::delete('libros/{libro}', 'LibroController@destroy')->name('libros.delete')->middleware('permission:libros.delete');
 
     //Permisos para Licenciaturas
     Route::get('licenciaturas', 'LicenciaturaController@index')->name('licenciaturas.index')->middleware('permission:licenciaturas.index');
@@ -82,6 +87,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('materias/{licenciatura}', 'MateriaController@index')->name('materias.index');
     //Obtiene materias segun el cuatrimestre proporcionado
     Route::get('materia/{cuatrimestre}/{licenciaturaId}', 'MateriaController@materiasByCuatrimestre')->name('materiasByCuatrimestre.get');
+    //Crea materias
+    Route::get('materia/create', 'MateriaController@create')->name('materias.create')->middleware('permission:materias.create');
+    Route::post('materia/store', 'MateriaController@store')->name('materias.store')->middleware('permission:materias.create');
+
 
     Route::group(['namespace' => 'DashboardCentroComputo'], function ()
     {

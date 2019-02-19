@@ -29,7 +29,7 @@
                 <div class="card">
                     <div class="card-header">Ingresa los datos del nuevo libro</div>
                     <div class="card-body">
-                        <form id="form_libro_create" method="POST" action="{{ route('libros.store') }}">
+                        <form id="form_libro_create" method="POST" action="{{ route('libros.store') }}" enctype="multipart/form-data">
                             <div class="form-group" >
                                 <label for="text">Titulo</label>
                                 <input class="form-control"
@@ -74,9 +74,9 @@
                                 </div>
                             </div>
                             <div class="custom-file" id="customFile" lang="es">
-                                <input type="file" name="url_image" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp">
+                                <input type="file" name="url_image" class="custom-file-input" id="input_img_libro" aria-describedby="fileHelp" value="Buscar">
                                 <label class="custom-file-label" for="exampleInputFile">
-                                    Select file...
+                                    Selecciona la imagen para el libro
                                 </label>
                             </div>
                             <br>
@@ -181,32 +181,31 @@
         //el objeto libro (JSON) por AJAX a la url de libros.store
         $("#form_libro_create").submit(function (event) {
 
-            var data = {
-                libro:{
-                    titulo: $('input[name="titulo"]').val(),
-                    autor: $('input[name="autor"]').val(),
-                    numero: $('input[name="numero"]').val()
-                },
-                materia:{
-                    id: $("#select_materia").children("option:selected").val()
-                },
-                file:$('input[name="url_image"]').val()
+            var imagen =  $('#input_img_libro')[0].files[0];
+            var formData = new FormData();
 
+            var titulo = $('input[name="titulo"]').val();
+            var autor = $('input[name="autor"]').val();
+            var numero = $('input[name="numero"]').val();
+            var id_materia = $("#select_materia").children("option:selected").val();
 
-            };
-
-            console.log(data);
+            formData.append('titulo', titulo);
+            formData.append('autor', autor);
+            formData.append('numero', numero);
+            formData.append('id_materia', id_materia);
+            formData.append('img', imagen);
 
             $.ajax({
-                type: $(this).attr("method"),
-                dataType: 'json',
                 url: $(this).attr("action"),
-                data: data,
+                type: $(this).attr("method"),
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType : false,
                 beforeSend: function () {
 
                 },
                 success: function (response) {
-                    console.log(response);
                     window.location.href = "/libros";
                 },
                 error: function (err) {
