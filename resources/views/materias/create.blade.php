@@ -7,7 +7,7 @@
                 <a class="nav-link" href="{{route('biblioteca')}}">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('libros.index')}}">Libros</a>
+                <a class="nav-link" href="{{route('biblioteca.administrar')}}">Administrar</a>
             </li>
             <li class="nav-item">
                 <form method="POST" action="{{ route('cerrar_sesion') }}">

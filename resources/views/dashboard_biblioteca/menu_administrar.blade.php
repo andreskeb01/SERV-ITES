@@ -37,6 +37,10 @@
             <h5>{{ auth()->user()->name }}</h5>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="row" >
         <div class="col-lg-4 text-center">
             <img id="libro" class="rounded-circle img-fluid d-block mx-auto" width="140" height="140" src="/base-biblioteca/images/menu_libro.png" alt="">
@@ -54,6 +58,12 @@
             <p>Administrar usuarios.</p>
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 @endsection
 
 @section('footer')
