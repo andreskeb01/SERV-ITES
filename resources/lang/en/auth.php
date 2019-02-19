@@ -17,7 +17,8 @@ return [
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'email_error' => 'Verifica tu email',
     'password_error' => 'Verificar contraseña',
-    'auth_error' => 'Las credenciales no coinciden con nuestros registros'
-
+    'password_confirm_error' => 'Confirma tu contraseña',
+    'auth_error' => 'Las credenciales no coinciden con nuestros registros',
+    'register_failed' => 'Registro erróneo, intenta nuevamente',
 
 ];

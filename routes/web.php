@@ -23,6 +23,10 @@ Route::group(['namespace' => 'Auth', 'prefix' => '' ], function ()
     Route::get('/logincomputo', 'LoginComputoController@showLoginComputoForm')->name('login_computo_index');
     Route::post('/logincomputo', 'LoginComputoController@autenticar')->name('login_computo_autenticar');
     Route::post('/computologout', 'LoginComputoController@cerrarSesion')->name('computo_cerrar_sesion');
+
+    Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
+    Route::post('/register', 'RegisterController@register')->name('register.create');
+
 });
 
 Route::get ('/biblioteca', 'DashboardBiblioteca\DashboardController@index')->name('biblioteca');
@@ -78,8 +82,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('materia/{cuatrimestre}/{licenciaturaId}', 'MateriaController@materiasByCuatrimestre')->name('materiasByCuatrimestre.get');
     Route::get('materia/create', 'MateriaController@create')->name('materias.create')->middleware('permission:materias.create');
     Route::post('materia/store', 'MateriaController@store')->name('materias.store')->middleware('permission:materias.create');
-
-
 
     //***************************************************************************************************************************************************************
     //Rutas de centro de computo
