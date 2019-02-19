@@ -1,0 +1,7 @@
+stash@{0}: WIP on biblioteca-develop: 383efb9 agregado menu de administracion y formulario de creacion de materias
+stash@{1}: WIP on master: 2a69c6e Agregado usuario EncargadoCC y agregado logica en Login Controller para redireccionar a biblioteca o centro de computo por medio del id_rol_usuario
+stash@{2}: WIP on master: 338eab7 ajustado de card en materia.index diseño responsivo
+stash@{3}: WIP on master: eaec148 agregando vista crear libro(falta funcion dropdown para materia)
+stash@{4}: WIP on master: 588778e vista de licenciaturas lista.
+stash@{5}: WIP on master: 04aecb6 agregando logo itesen dashboard biblioteca
+stash@{6}: WIP on master: 22e8f2b pagina inicio biblioteca
