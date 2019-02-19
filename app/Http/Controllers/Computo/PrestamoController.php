@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Computo;
 
 
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use App\Prestamo;
 use App\Inventario;
@@ -47,12 +49,14 @@ class PrestamoController extends Controller
         return response()->json("Prestamo creado correctamente id:".$prestamo->id);
     }
 
-    public function update(Prestamo $prestamo){
+    public function delete(Prestamo $prestamo){
 
-        //Carga nuevamente las relaciones perdidas anteriormente
-        $prestamo->format($prestamo);
+        $horaSalida = request()->get('dtPickerHoraSalida'); // or however you send it
+        $datetime = DateTime::createFromFormat("Y-m-d\TH:i", $horaSalida);
 
-        $prestamo->save();
+        $prestamo->hora_salida = $datetime;
+
+        $prestamo->delete();
 
         return back()
             ->with('info', 'Prestamo finalizado con éxito');

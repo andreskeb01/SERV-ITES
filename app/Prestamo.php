@@ -20,7 +20,7 @@ class Prestamo extends Model
     }
 
     public function scopeRelaciones($query, $usuario, $dispositivos){
-        $query->with($usuario, $dispositivos);
+        $query->with($usuario, $dispositivos)->where('status','=','activo');
     }
 
     public function format(Prestamo $prestamo)
@@ -34,28 +34,30 @@ class Prestamo extends Model
         ];
     }
 
+    public function actualizar(Prestamo $prestamo, $datetime)
+    {
+
+
+    }
+
     protected static function boot()
     {
-        static::updating(function ($prestamo){
-
+        static::deleting(function ($prestamo){
             parent::boot();
-
             if(! \App::runningInConsole()){
+                //Carga nuevamente las relaciones perdidas anteriormente
+                $prestamo->format($prestamo);
 
                 //Actualizamos los ids del prestamo a null
-               $prestamo->usuario->prestamo_id = null;
-               foreach($prestamo->dispositivos as $dispositivo){
+                //para suprimir las relaciones de usuario y dispositivos
+                $prestamo->usuario->prestamo_id = null;
+                foreach($prestamo->dispositivos as $dispositivo){
                     $dispositivo->prestamo_id = null;
-               }
+                }
+                $prestamo->status = "finalizado";
 
-               $prestamo->status = "finalizado";
-
-               $prestamo->push();
-
-               //dd($prestamo);
-
-                //$prestamo->dispositivos->detach();
-                //deleting elimina por completo, incluso el prestamo
+                //Actualizamos el registro
+                $prestamo->push();
             }
         });
     }

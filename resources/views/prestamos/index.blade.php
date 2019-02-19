@@ -36,8 +36,8 @@
                                 <th>Docente</th>
                                 <th>Dispositivos</th>
                                 <th>Hora entrada</th>
+                                <th colspan="1">&nbsp;</th>
                                 <th>Hora salida</th>
-                                <th colspan="3">&nbsp;</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -48,14 +48,16 @@
                                     <td>{{$prestamo->usuario->name}}</td>
                                     <td>{{$prestamo->total}}</td>
                                     <td>{{$prestamo->created_at}}</td>
-                                    <td><input id="dtPickerHoraSalida" class="form-control" type="datetime-local"></td>
                                     <td>
                                         <a href="{{route('libros.show', $prestamo)}}" class="btn btn-sm">Ver detalle</a>
                                     </td>
                                     <td>
-                                        {!! Form::open(['route' => ['prestamos.update', $prestamo], 'method' => 'PUT']) !!}
-                                        <button class="btn btn-sm btn-danger">Finalizar prestamo</button>
-                                        {!! Form::close() !!}
+                                        <div class="form-group row">
+                                            {!! Form::open(['route' => ['prestamos.delete', $prestamo], 'method' => 'DELETE', 'class' => 'form-inline']) !!}
+                                            <input id="dtPickerHoraSalida" name="dtPickerHoraSalida" class="form-control mb-2 col-8" type="datetime-local">
+                                            <button class="btn btn-sm btn-danger  mb-2 col-4">Finalizar prestamo</button>
+                                            {!! Form::close() !!}
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
@@ -122,7 +124,6 @@
             }
             return unformatedSeconds;
         }
-
 
     </script>
 @endsection

@@ -29,7 +29,7 @@ Route::group(['namespace' => 'Computo', 'prefix' => '' ], function ()
 {
     Route::get('prestamos', 'PrestamoController@index')->name('prestamos.index');
     Route::post('prestamos/store', 'PrestamoController@store')->name('prestamos.create');
-    Route::put('prestamos/{prestamo}', 'PrestamoController@update')->name('prestamos.update');
+    Route::delete('prestamos/{prestamo}', 'PrestamoController@delete')->name('prestamos.delete');
 });
 
 Route::get ('/biblioteca', 'DashboardBiblioteca\DashboardController@index')->name('biblioteca');
