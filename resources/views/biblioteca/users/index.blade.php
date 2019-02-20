@@ -7,6 +7,9 @@
                 <a class="nav-link" href="{{route('biblioteca')}}">Inicio</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{route('biblioteca.administrar')}}">Administrar</a>
+            </li>
+            <li class="nav-item">
                 <form method="POST" action="{{ route('cerrar_sesion') }}">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -25,7 +28,7 @@
             <div class="col-md8 col-md-offset-2">
                 <div class="card">
                     <div class="card-header">
-                        Materias disponibles
+                        Usuarios registrados
                         @can('usuarios.create')
                             <a href="{{route('usuarios.create')}}" class="btn btn-sm btn-primary float-right">Crear</a>
                         @endcan
@@ -45,12 +48,10 @@
                             @forelse($usuarios as $usuario)
                                 <tr>
                                     <td>{{$usuario->id}}</td>
-                                    <td>{{$usuario->nombre}}</td>
+                                    <td>{{$usuario->name}}</td>
                                     <td>{{$usuario->email}}</td>
                                     <td>
-                                        @foreach($usuario->getRoles() as $role)
-                                            {{$role}}
-                                            @endforeach
+                                        {{$usuario->getRoles()[0]}}
                                     </td>
                                     <td>
                                         @can('usuarios.show')

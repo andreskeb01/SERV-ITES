@@ -7,6 +7,9 @@
                 <a class="nav-link" href="{{route('biblioteca')}}">Inicio</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{route('biblioteca.administrar')}}">Administrar</a>
+            </li>
+            <li class="nav-item">
                 <form method="POST" action="{{ route('cerrar_sesion') }}">
                     {{ csrf_field() }}
                     <div class="form-group">

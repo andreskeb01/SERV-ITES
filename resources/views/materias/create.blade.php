@@ -156,7 +156,7 @@
                     },
                     success: function (response) {
                         console.log(response);
-                        window.location.href = "/biblioteca/administrar";
+                        window.location.href = "/materias";
                     },
                     error: function (err) {
                         console.log(err);
