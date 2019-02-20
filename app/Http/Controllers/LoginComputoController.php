@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class LoginComputoController extends Controller
 {
@@ -19,27 +19,16 @@ class LoginComputoController extends Controller
         return view( 'auth.logincc');
     }
 
-    public function autenticar()
+    public function autenticar(Request $request)
     {
-       $credentials = $this->validate(request(), [
+       $credentials = $this->validate($request, [
            'email' => 'email|required|string',
            'password' =>'required|string'
        ]);
 
-
-       if( Auth::attempt($credentials)){
-           $user = Auth::user();
-           $id_rol_usuario = DB::table('role_user')->where([['user_id', '=', $user->id]])->first();
-           //Roles id
-           //role_id : 1 =  SuperAdmin
-           //role_id : 2 =  EncargadoBiblioteca
-           //role_id : 3 =  Alumno
-           //role_id : 4 =  EncargadoCC
-           //role_id : 5 =  Docente
+       if(Auth::attempt($credentials)){
 
                return redirect()->route('centrocomputo' );
-
-            //Ver posibilidad de redirigir al super admin a un menu para las 3 vistas con otro elseif(users, biblioteca cc)
 
        } else return back()
            ->withErrors(['usuario_invalido'=>'fallo la autenticacion'])
