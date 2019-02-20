@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Hash;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -19,10 +20,10 @@ class LoginController extends Controller
         return view( 'auth.login');
     }
 
-    public function autenticar()
+    public function autenticar(Request $request)
     {
 
-       $credentials = $this->validate(request(), [
+       $credentials = $this->validate($request, [
            'email' => 'email|required|string',
            'password' =>'required|string'
        ]);
@@ -30,18 +31,7 @@ class LoginController extends Controller
 
        if(Auth::attempt($credentials)){
 
-           $user = Auth::user();
-           $id_rol_usuario = DB::table('role_user')->where([['user_id', '=', $user->id]])->first();
-           //Roles id
-           //role_id : 1 =  SuperAdmin
-           //role_id : 2 =  EncargadoBiblioteca
-           //role_id : 3 =  Alumno
-           //role_id : 4 =  EncargadoCC
-           //role_id : 5 =  Docente
-
-               return redirect()->route('biblioteca' );
-
-            //Ver posibilidad de redirigir al super admin a un menu para las 3 vistas con otro elseif(users, biblioteca cc)
+           return redirect()->route('biblioteca' );
 
        } else return back()
            ->withErrors(['usuario_invalido'=>'fallo la autenticacion'])

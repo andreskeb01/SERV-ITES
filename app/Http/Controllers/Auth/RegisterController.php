@@ -55,7 +55,8 @@ class RegisterController extends Controller
             $user = $this->create([
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
-                'password' => bcrypt($request->get('password')),
+                'password' => $request->get('password'),
+                'remember_token' => str_random(10),
             ]);
 
             //Busca el rol y lo asocia al usuario
@@ -110,6 +111,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'remember_token' => $data['remember_token']
         ]);
     }
 
