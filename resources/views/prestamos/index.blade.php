@@ -78,6 +78,11 @@
         </div>
     </div>
 @endsection
+@section('footer')
+    <div class="py-3 bg-primary" style=" width: 100%; bottom: 0; position: fixed;">
+        <p class="m-0 text-center text-white">&copy; 2019 <strong>Instituto René Descartes.</strong> Todos los derechos reservados</p>
+    </div>
+@endsection
 @section('script')
     <script>
         $(document).ready(function () {

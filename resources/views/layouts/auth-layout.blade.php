@@ -15,7 +15,7 @@
 </div>
 
 <!-- Footer -->
-<footer class="py-3 bg-dark">
+<footer>
     @yield('footer')
 </footer>
 

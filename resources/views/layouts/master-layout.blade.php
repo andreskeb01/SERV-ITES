@@ -21,8 +21,8 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <img src="/base-biblioteca/images/logo.jpg" height="40" width="100">
-        <a class="navbar-brand" href="{{route('biblioteca')}}">ITES "Rene Descartes"</a>
+        <img src="/base-biblioteca/images/footer_ites.png" height="70" width="160">
+        <a class="navbar-brand" href="{{route('biblioteca')}}"> "René Descartes"</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,7 +41,7 @@
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-3 bg-dark">
+<footer>
     @yield('footer')
 </footer>
 

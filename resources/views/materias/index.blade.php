@@ -24,6 +24,7 @@
 @section('content')
     <div class="container">
         <br>
+        <br>
         <div class="row justify-content-center">
             <div class="col-md8 col-md-offset-2">
                 <div class="card">

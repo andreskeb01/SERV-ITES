@@ -30,6 +30,7 @@
 
 @section('content')
 
+    <br>
     <!-- Introduction Row -->
     <div style="padding: 20px; display: flex;">
         <h3>Bienvenido</h3>
@@ -65,10 +66,4 @@
     </div>
     @endcan
 
-@endsection
-
-@section('footer')
-    <div class="container">
-        <p class="m-0 text-center text-white">&copy; 2018 <strong>Instituto René Descartes.</strong> Todos los derechos reservados</p>
-    </div>
 @endsection

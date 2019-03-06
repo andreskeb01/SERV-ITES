@@ -8,13 +8,10 @@
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Acerca de</a>
-            </li>
             <!--boton administrar para acceder al inventario-->
             @can('inventario.index')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('inventario.index')}}">Administrar</a>
+                    <a class="nav-link" href="{{route('prestamos.index')}}">Prestamos</a>
                 </li>
                 <!--------------------------------------------------------------------------->
             @endcan
@@ -133,6 +130,7 @@
                     <button id="btn_prestar" class="btn btn-success" disabled>Registrar</button>
                 </div>
             </div>
+            <br><br><br>
         </div>
     </div>
     @endcan
@@ -140,8 +138,8 @@
 @endsection
 
 @section('footer')
-    <div class="container">
-        <p class="m-0 text-center text-white">&copy; 2018 <strong>Instituto René Descartes.</strong> Todos los derechos reservados</p>
+    <div class="py-3 bg-primary" style=" width: 100%; bottom: 0; position: fixed;">
+        <p class="m-0 text-center text-white">&copy; 2019 <strong>Instituto René Descartes.</strong> Todos los derechos reservados</p>
     </div>
 @endsection
 

@@ -4,20 +4,15 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="">Inicio
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Acerca de</a>
+                <a class="nav-link" href="{{route('biblioteca')}}">Inicio</a>
             </li>
             @can('libros.index')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('libros.index')}}">Administrar</a>
+                    <a class="nav-link" href="{{route('biblioteca.administrar')}}">Administrar</a>
                 </li>
             @endcan
             <li class="nav-item">
-                <form method="POST" action="{{ route('cerrar_sesion') }}">
+                <form method="POST" action="{{route('cerrar_sesion')}}">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <button class="btn btn-sm btn-primary">Cerrar sesión</button>
@@ -30,6 +25,7 @@
 
 @section('content')
 
+    <br>
     <!-- Introduction Row -->
     <div style="padding: 20px; display: flex;">
         <h3>Bienvenido</h3>
@@ -67,7 +63,7 @@
 @endsection
 
 @section('footer')
-    <div class="container">
+    <div class="py-3 bg-dark" style=" width: 100%; bottom: 0; position: fixed;">
         <p class="m-0 text-center text-white">&copy; 2018 <strong>Instituto René Descartes.</strong> Todos los derechos reservados</p>
     </div>
 @endsection

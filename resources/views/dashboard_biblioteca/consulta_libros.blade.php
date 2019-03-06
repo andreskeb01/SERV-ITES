@@ -22,12 +22,12 @@
     <div class="row mh-100 h-100">
         <div class="container">
             <br>
+            <br>
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-offset-2">
                     <div class="card">
-                        <br>
-                        <p class="h4 font-weight-bold font-italic text-center" >{{$licenciatura->nombre}}</p>
-                        <div class="card-header"><h5>Selecciona tu cuatrimestre</h5></div>
+
+                        <div class="card-header font-italic font-weight-bold text-center"><h4>{{$licenciatura->nombre}}</h4></div>
                         <div class="card-body">
                             <div class="d-flex">
                                 <ul class="nav nav-pills flex-column" role="tablist">

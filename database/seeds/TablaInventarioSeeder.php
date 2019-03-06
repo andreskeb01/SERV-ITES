@@ -100,7 +100,7 @@ class TablaInventarioSeeder extends Seeder
 
         $proyector01 = factory(Inventario::class)->create([
             'nombre' => 'proyector-EPSON',
-            'num_serie' => '64898Y54GGRTYGFPIHG',
+            'num_serie' => '64898Y54G',
             'modelo' => 'SEIKO EPSON CORP',
             'descripcion' => 'Color blanco',
             'clave' => 'proyector-salon-01',

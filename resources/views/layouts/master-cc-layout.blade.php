@@ -41,7 +41,7 @@
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-3 bg-primary">
+<footer>
     @yield('footer')
 </footer>
 
